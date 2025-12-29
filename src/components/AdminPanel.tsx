@@ -1,26 +1,25 @@
-import React from 'react';
 import {
-    Users,
-    MapPin,
     Activity,
-    BookOpen,
     AlertTriangle,
+    BookOpen,
     CheckCircle2,
+    FileText,
+    MapPin,
     TrendingUp,
-    FileText
+    Users
 } from 'lucide-react';
 import {
-    BarChart,
     Bar,
-    XAxis,
-    YAxis,
+    BarChart,
     CartesianGrid,
-    Tooltip,
-    ResponsiveContainer,
-    PieChart,
-    Pie,
     Cell,
-    Legend
+    Legend,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis
 } from 'recharts';
 
 const wilayahStats = [

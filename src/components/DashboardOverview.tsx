@@ -1,13 +1,12 @@
-import React from 'react';
 import {
-    Sprout,
     AlertTriangle,
     Calendar,
+    CheckCircle2,
     CloudRain,
-    TrendingUp,
-    CheckCircle2
+    Sprout,
+    TrendingUp
 } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const trendData = [
     { bulan: 'Jan', kesehatan: 85 },

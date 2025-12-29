@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 
 import {
+  ClipboardList,
   LayoutDashboard,
   Leaf,
-  ClipboardList,
   Map,
+  Menu,
+  Shield,
+  ShoppingCart,
   TrendingUp,
   Wallet,
-  ShoppingCart,
-  Shield,
-  Menu,
   X
 } from 'lucide-react';
+import { AdminPanel } from './components/AdminPanel';
 import { DashboardOverview } from './components/DashboardOverview';
 import { DeteksiPenyakit } from './components/DeteksiPenyakit';
-import { RekomendasiAgronomi } from './components/RekomendasiAgronomi';
-import { ManajemenLahan } from './components/ManajemenLahan';
-import { PrediksiPanen } from './components/PrediksiPanen';
 import { Keuangan } from './components/Keuangan';
+import { ManajemenLahan } from './components/ManajemenLahan';
 import { Marketplace } from './components/Marketplace';
-import { AdminPanel } from './components/AdminPanel';
+import { PrediksiPanen } from './components/PrediksiPanen';
+import { RekomendasiAgronomi } from './components/RekomendasiAgronomi';
 
 type MenuItem = {
   id: string;
@@ -64,7 +64,7 @@ export default function App() {
               {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
                 <Leaf className="w-6 h-6 text-white" />
               </div>
               <div>

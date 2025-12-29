@@ -1,6 +1,5 @@
-import React from 'react';
-import { Calendar, TrendingUp, Package, DollarSign, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend } from 'recharts';
+import { AlertCircle, Calendar, CheckCircle2, DollarSign, Package, TrendingUp } from 'lucide-react';
+import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const harvestPredictions = [
     {
@@ -309,7 +308,7 @@ export function PrediksiPanen() {
             </div>
 
             {/* CTA Section */}
-            <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white">
+            <div className="bg-linear-to-r from-green-500 to-green-600 rounded-xl p-8 text-white">
                 <div className="flex items-center justify-between gap-6">
                     <div>
                         <h3 className="text-white mb-2">Siap Merencanakan Penjualan?</h3>

@@ -1,13 +1,12 @@
-import React from 'react';
 import {
-    Droplet,
-    Sprout,
+    AlertTriangle,
     Bug,
-    Sun,
     Calendar,
     CheckCircle2,
     Clock,
-    AlertTriangle
+    Droplet,
+    Sprout,
+    Sun
 } from 'lucide-react';
 
 const recommendations = [

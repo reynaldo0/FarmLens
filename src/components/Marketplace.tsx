@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
 import {
-    Search,
+    Calendar,
+    CheckCircle2,
     Filter,
     MapPin,
-    Calendar,
     Package,
-    TrendingUp,
-    CheckCircle2,
-    Star
+    Search,
+    Star,
+    TrendingUp
 } from 'lucide-react';
+import { useState } from 'react';
 
 const listings = [
     {
@@ -327,7 +327,7 @@ export function Marketplace() {
             )}
 
             {/* Info Section */}
-            <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white">
+            <div className="bg-linear-to-r from-green-500 to-green-600 rounded-xl p-8 text-white">
                 <div className="max-w-3xl">
                     <h3 className="text-white mb-2">Keunggulan Marketplace Kami</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">

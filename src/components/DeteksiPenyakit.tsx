@@ -1,5 +1,5 @@
+import { AlertCircle, Camera, CheckCircle2, Info, Upload } from 'lucide-react';
 import React, { useState } from 'react';
-import { Upload, AlertCircle, CheckCircle2, Info, Camera } from 'lucide-react';
 
 export function DeteksiPenyakit() {
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);

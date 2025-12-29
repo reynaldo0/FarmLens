@@ -1,27 +1,26 @@
-import React from 'react';
-import { 
-  DollarSign, 
-  TrendingUp, 
-  TrendingDown, 
-  PieChart as PieChartIcon,
-  Calculator,
-  FileText,
-  Info
+import {
+    Calculator,
+    DollarSign,
+    FileText,
+    Info,
+    PieChart as PieChartIcon,
+    TrendingDown,
+    TrendingUp
 } from 'lucide-react';
-import { 
-  PieChart, 
-  Pie, 
-  Cell, 
-  ResponsiveContainer, 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend,
-  LineChart,
-  Line
+import {
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Cell,
+    Legend,
+    Line,
+    LineChart,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis
 } from 'recharts';
 
 const biayaProduksi = [
