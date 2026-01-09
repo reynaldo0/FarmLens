@@ -139,7 +139,7 @@ export function PrediksiPanen() {
                                     {pred.status === 'optimal' ? 'Optimal' : 'Waspada'}
                                 </span>
                             </div>
-
+{/*  */}
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
                                 <div className="p-3 bg-gray-50 rounded-lg">
                                     <p className="text-xs text-gray-600 mb-1">Estimasi Volume</p>
