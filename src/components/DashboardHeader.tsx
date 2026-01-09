@@ -25,7 +25,7 @@ export default function DashboardHeader({
                     </button>
 
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                        <div className="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
                             <Leaf className="w-6 h-6 text-white" />
                         </div>
                         <div>

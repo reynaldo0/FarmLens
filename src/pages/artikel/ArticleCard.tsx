@@ -1,5 +1,5 @@
 import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
-import type { Article } from '../../data/article';
+import type { Article } from '../../data/articleData';
 
 export function ArticleCard({ article }: { article: Article }) {
     return (

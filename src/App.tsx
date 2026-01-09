@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PublicLayout from './PublicLayout';
 import Artikel from './pages/Artikel';
 import DashboardLayout from './DashboardLayout';
+import Beranda from './pages/Beranda';
 
 export default function App() {
   return (
@@ -11,8 +12,8 @@ export default function App() {
 
         {/* PUBLIC */}
         <Route element={<PublicLayout />}>
-          {/* <Route path="/" element={<Beranda />} /> */}
-          <Route path="/" element={<Artikel />} />
+          <Route path="/" element={<Beranda />} />
+          <Route path="/artikel" element={<Artikel />} />
           {/* <Route path="/blog" element={<Blog />} />
           <Route path="/kamus" element={<Kamus />} /> */}
         </Route>

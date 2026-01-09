@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CategoryFilter } from './artikel/CategoryFilter';
-import { articles, categories } from '../data/article';
+import { articles, categories } from '../data/articleData';
 import { FeaturedArticle } from './artikel/FeaturedArticle';
 import { ArticleCard } from './artikel/ArticleCard';
 
@@ -25,7 +25,7 @@ export default function Artikel() {
                         📰 In-Depth Articles
                     </div>
                     <h1 className="text-4xl md:text-5xl mb-4">
-                        <span className="bg-gradient-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent">
                             Artikel Mendalam
                         </span>
                     </h1>

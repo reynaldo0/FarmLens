@@ -1,5 +1,5 @@
 import { Calendar, Clock, User, ArrowRight, TrendingUp } from 'lucide-react';
-import type { Article } from '../../data/article';
+import type { Article } from '../../data/articleData';
 
 export function FeaturedArticle({ article }: { article: Article }) {
     return (
