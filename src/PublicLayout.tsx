@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router-dom';
+import { Navbar } from './components/Navbar';
 
 export default function PublicLayout() {
     return (
         <>
             {/* Navbar Public */}
-            <header className="border-b bg-white p-4">Navbar Public</header>
+            <Navbar />
 
             <Outlet />
 
