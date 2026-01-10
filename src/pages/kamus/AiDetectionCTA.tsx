@@ -2,18 +2,26 @@ import { Scan, Upload } from 'lucide-react';
 
 export default function AIDetectionCTA() {
     return (
-        <div className="mt-16 bg-linear-to-br from-green-600 to-emerald-700 rounded-3xl p-12 text-white text-center shadow-2xl">
-            <Scan className="w-12 h-12 mx-auto mb-4" />
-            <h3 className="text-3xl font-bold mb-4">
-                Butuh Diagnosa Instan dengan AI?
-            </h3>
-            <p className="mb-8 text-green-50">
-                Upload foto tanaman dan dapatkan analisis penyakit otomatis
-            </p>
+        <div className="mt-16 bg-linear-to-br from-green-600 to-emerald-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full translate-x-1/2 -translate-y-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -translate-x-1/2 translate-y-1/2"></div>
 
-            <button className="bg-white text-green-700 px-8 py-4 rounded-xl flex gap-2 mx-auto">
-                <Upload /> Upload Foto <span className="text-xs">(Coming Soon)</span>
-            </button>
+            <div className="relative z-10 text-center max-w-3xl mx-auto">
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <Scan className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                    Butuh Diagnosa Instan dengan AI?
+                </h3>
+                <p className="mb-8 text-green-50 text-lg">
+                    Upload foto tanaman Anda dan dapatkan analisis penyakit secara otomatis menggunakan teknologi AI FarmLens
+                </p>
+                <button className="bg-white text-green-700 px-8 py-4 rounded-xl font-medium hover:bg-green-50 transition-all hover:scale-105 shadow-lg inline-flex items-center gap-2">
+                    <Upload className="w-5 h-5" />
+                    Upload Foto Tanaman
+                    <span className="text-xs bg-green-100 px-2 py-1 rounded-full">Coming Soon</span>
+                </button>
+            </div>
         </div>
     );
 }

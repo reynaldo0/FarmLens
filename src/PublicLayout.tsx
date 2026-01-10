@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { AnimatePresence } from 'framer-motion';
 import PageTransition from './components/PageTransition';
+import Footer from './components/Footer';
 
 export default function PublicLayout() {
     const location = useLocation();
@@ -17,9 +18,7 @@ export default function PublicLayout() {
             </AnimatePresence>
 
             {/* Footer */}
-            <footer className="bg-gray-100 p-6 text-center">
-                © FarmLens
-            </footer>
+            <Footer />
         </>
     );
 }
