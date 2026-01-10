@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { BLOG_POSTS, BLOG_TAGS } from '../data/blogData';
-import BlogHeader from './blog/Header';
+import BlogHeader from './blog/BlogHeader';
 import SearchBar from './blog/SearchBar';
 import TagFilter from './blog/TagFilter';
 import BlogCard from './blog/BlogCard';

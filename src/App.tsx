@@ -6,6 +6,7 @@ import DashboardLayout from './DashboardLayout';
 import Beranda from './pages/Beranda';
 import Belajar from './pages/Belajar';
 import Blog from './pages/Blog';
+import KamusTanaman from './pages/Kamus';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/artikel" element={<Artikel />} />
           <Route path="/belajar" element={<Belajar />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/kamus" element={<KamusTanaman />} />
         </Route>
 
         {/* DASHBOARD */}

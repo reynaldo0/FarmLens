@@ -20,7 +20,7 @@ export default function Belajar() {
                         📚 Learning Center
                     </div>
                     <h1 className="text-4xl md:text-5xl mb-4">
-                        <span className="bg-gradient-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent">
                             Belajar Urban Farming
                         </span>
                     </h1>

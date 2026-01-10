@@ -29,9 +29,9 @@ export default function DashboardHeader({
                             <Leaf className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                            <h1 className="text-green-700 font-semibold">DigiSmart</h1>
+                            <h1 className="text-green-700 font-semibold">Farmlens</h1>
                             <p className="text-xs text-gray-500">
-                                Platform Pertanian Terintegrasi
+                                Dashboard Pertanian Terintegrasi
                             </p>
                         </div>
                     </div>
@@ -40,12 +40,12 @@ export default function DashboardHeader({
                 {/* RIGHT */}
                 <div className="flex items-center gap-4">
                     <div className="hidden sm:block text-right">
-                        <p className="text-sm text-gray-900">Budi Santoso</p>
+                        <p className="text-sm text-gray-900">FARMLENS TEAM</p>
                         <p className="text-xs text-gray-500 capitalize">{userRole}</p>
                     </div>
 
                     <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                        <span className="text-green-700 font-medium">BS</span>
+                        <span className="text-green-700 font-medium">FT</span>
                     </div>
                 </div>
 

@@ -11,7 +11,7 @@ export default function PublicLayout() {
 
             {/* Footer */}
             <footer className="bg-gray-100 p-6 text-center">
-                © DigiSmart
+                © FarmLens
             </footer>
         </>
     );
