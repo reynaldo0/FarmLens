@@ -23,7 +23,7 @@ export default function KamusTanaman() {
     }, [search, category]);
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-green-50 to-white py-12">
+        <div className="min-h-screen bg-linear-to-b from-green-50 to-white pt-28 md:pt-32">
             <div className="max-w-7xl mx-auto px-4">
 
                 <KamusHeader />
