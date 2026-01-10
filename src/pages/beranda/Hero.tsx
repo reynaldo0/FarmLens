@@ -74,7 +74,7 @@ export default function HeroSection() {
                         <img
                             src="https://images.unsplash.com/photo-1617532740648-0946d1110179?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1cmJhbiUyMGZhcm1pbmclMjB2ZWdldGFibGVzfGVufDF8fHx8MTc2Nzk3MDQ0MXww&ixlib=rb-4.1.0&q=80&w=1080"
                             alt="Urban Farming"
-                            className="relative rounded-3xl shadow-2xl w-full h-[500px] object-cover"
+                            className="relative rounded-3xl shadow-2xl w-full h-125 object-cover"
                         />
                     </div>
                 </div>
