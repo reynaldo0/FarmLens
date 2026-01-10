@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { NavLink, useLocation } from 'react-router-dom'
 
-type PagePath = '/' | '/belajar' | '/artikel' | '/tentang' | '/lokasi'
+type PagePath = '/' | '/belajar' | '/artikel' | '/blog' | '/lokasi'
 
 export function Navbar() {
     const { pathname } = useLocation()
@@ -18,7 +18,7 @@ export function Navbar() {
         { label: 'Beranda', href: '/' },
         { label: 'Belajar', href: '/belajar' },
         { label: 'Artikel', href: '/artikel' },
-        { label: 'Tentang', href: '/tentang' },
+        { label: 'Blog', href: '/blog' },
         { label: 'Lokasi', href: '/lokasi' },
     ]
 
