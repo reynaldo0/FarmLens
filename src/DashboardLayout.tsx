@@ -14,6 +14,7 @@ import { Keuangan } from './pages/dashboard/Keuangan';
 import { Marketplace } from './pages/dashboard/Marketplace';
 import { AdminPanel } from './pages/dashboard/AdminPanel';
 import DashboardPageTransition from './components/DashboardTransition';
+import { WeatherRecommendationCard } from './pages/dashboard/Weather';
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -82,6 +83,14 @@ export default function DashboardLayout() {
                                 element={
                                     <DashboardPageTransition>
                                         <PrediksiPanen />
+                                    </DashboardPageTransition>
+                                }
+                            />
+                            <Route
+                                path="weather"
+                                element={
+                                    <DashboardPageTransition>
+                                        <WeatherRecommendationCard />
                                     </DashboardPageTransition>
                                 }
                             />

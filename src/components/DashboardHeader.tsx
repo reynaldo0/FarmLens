@@ -1,4 +1,5 @@
 import { Menu, X, Leaf } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface Props {
     sidebarOpen: boolean;
@@ -24,17 +25,22 @@ export default function DashboardHeader({
                         {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
 
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
-                            <Leaf className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                            <h1 className="text-green-700 font-semibold">Farmlens</h1>
-                            <p className="text-xs text-gray-500">
-                                Dashboard Pertanian Terintegrasi
-                            </p>
-                        </div>
-                    </div>
+                    <Link to={'/'}>
+                        <div className="flex items-center gap-3">
+                            <img
+                                src="/logo.png"
+                                alt="Logo"
+                                width={50}
+                                height={50}
+                                className="object-contain"
+                            />
+                            <div>
+                                <h1 className="text-lg tracking-tight text-neutral-900 group-hover:text-green-700 font-semibold">Farmlens</h1>
+                                <p className="text-xs text-gray-500">
+                                    Dashboard Pertanian Terintegrasi
+                                </p>
+                            </div>
+                        </div></Link>
                 </div>
 
                 {/* RIGHT */}

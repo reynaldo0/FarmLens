@@ -16,11 +16,10 @@ export default function AIDetectionCTA() {
                 <p className="mb-8 text-green-50 text-lg">
                     Upload foto tanaman Anda dan dapatkan analisis penyakit secara otomatis menggunakan teknologi AI FarmLens
                 </p>
-                <button className="bg-white text-green-700 px-8 py-4 rounded-xl font-medium hover:bg-green-50 transition-all hover:scale-105 shadow-lg inline-flex items-center gap-2">
+                <a href="/dashboard/deteksi" className="bg-white text-green-700 px-8 py-4 rounded-xl font-medium hover:bg-green-50 transition-all hover:scale-105 shadow-lg inline-flex items-center gap-2">
                     <Upload className="w-5 h-5" />
                     Upload Foto Tanaman
-                    <span className="text-xs bg-green-100 px-2 py-1 rounded-full">Coming Soon</span>
-                </button>
+                </a>
             </div>
         </div>
     );

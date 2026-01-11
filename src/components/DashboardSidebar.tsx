@@ -18,8 +18,9 @@ const menuItems = [
     { path: 'lahan', label: 'Manajemen Lahan', icon: Map, role: 'petani' },
     { path: 'panen', label: 'Prediksi Panen', icon: TrendingUp, role: 'petani' },
     { path: 'keuangan', label: 'Keuangan', icon: Wallet, role: 'petani' },
+    { path: 'weather', label: 'Cuaca', icon: TrendingUp, role: 'petani' },
     { path: 'marketplace', label: 'Marketplace', icon: ShoppingCart, role: 'all' },
-    { path: 'admin', label: 'Admin', icon: Shield, role: 'admin' },
+    { path: 'admin', label: 'Admin', icon: Shield, role: 'petani' },
 ];
 
 export default function Sidebar({ setSidebarOpen, userRole }: any) {

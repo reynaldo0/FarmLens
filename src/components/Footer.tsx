@@ -1,10 +1,3 @@
-import {
-    Leaf,
-    Mail,
-    Github,
-    Instagram,
-    Linkedin,
-} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -17,9 +10,13 @@ export default function Footer() {
                     {/* BRAND */}
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center">
-                                <Leaf className="w-6 h-6 text-white" />
-                            </div>
+                            <img
+                                src="/logo.png"
+                                alt="Logo"
+                                width={50}
+                                height={50}
+                                className="object-contain"
+                            />
                             <span className="text-xl font-bold text-gray-900">
                                 FarmLens
                             </span>
@@ -30,14 +27,6 @@ export default function Footer() {
                             mendeteksi penyakit tanaman, meningkatkan hasil panen,
                             dan mendukung ketahanan pangan berkelanjutan.
                         </p>
-
-                        {/* Social */}
-                        <div className="flex items-center gap-3 pt-2">
-                            <SocialLink icon={<Instagram />} />
-                            <SocialLink icon={<Linkedin />} />
-                            <SocialLink icon={<Github />} />
-                            <SocialLink icon={<Mail />} />
-                        </div>
                     </div>
 
                     {/* NAV */}

@@ -71,13 +71,13 @@ export function Navbar() {
                     onClick={() => window.scrollTo({ top: 0 })}
                     className="flex items-center gap-3 group"
                 >
-                        <img
-                            src="/logo.png"
-                            alt="Logo"
-                            width={50}
-                            height={50}
-                            className="object-contain"
-                        />
+                    <img
+                        src="/logo.png"
+                        alt="Logo"
+                        width={50}
+                        height={50}
+                        className="object-contain"
+                    />
                     <div className="flex flex-col text-left">
                         <span className="text-lg font-semibold tracking-tight text-neutral-900 group-hover:text-green-700 transition">
                             FarmLens
