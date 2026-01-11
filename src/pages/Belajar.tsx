@@ -65,7 +65,7 @@ export default function Belajar() {
                         Gunakan Kamus Tanaman untuk mendeteksi penyakit tanaman
                     </p>
                     <a
-                        href="/kamus-tanaman"
+                        href="/kamus"
                         className="bg-white text-green-700 px-8 py-3 rounded-xl font-medium"
                     >
                         Buka Kamus Tanaman

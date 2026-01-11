@@ -48,7 +48,7 @@ export default function HeroSection() {
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Link>
                             <Link
-                                to="/kamus-tanaman"
+                                to="/kamus"
                                 className="bg-white text-green-700 px-8 py-4 rounded-xl border-2 border-green-200 hover:border-green-300 hover:bg-green-50 transition-all"
                             >
                                 Cek Tanamanmu
