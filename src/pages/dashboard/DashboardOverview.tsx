@@ -7,8 +7,8 @@ import {
     TrendingUp
 } from 'lucide-react';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { useWeather } from '../../hooks/useWeather';
 import { useBmkgJakarta } from '../../hooks/useBmkgJakarta';
+import { useWeather } from '../../hooks/useWeather';
 
 const trendData = [
     { bulan: 'Jan', kesehatan: 85 },
@@ -25,7 +25,7 @@ export function DashboardOverview() {
     const { data: cuaca, loading } = useBmkgJakarta();
     const weather = useWeather(cuaca);
 
-    if (loading) {
+    if (loading || !cuaca) {
         return <p>Memuat cuaca BMKG…</p>;
     }
 

@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import DashboardHeader from './components/DashboardHeader';
 import Sidebar from './components/DashboardSidebar';
 
+import DashboardPageTransition from './components/DashboardTransition';
+import { AdminPanel } from './pages/dashboard/AdminPanel';
 import { DashboardOverview } from './pages/dashboard/DashboardOverview';
 import { DeteksiPenyakit } from './pages/dashboard/DeteksiPenyakit';
-import { RekomendasiAgronomi } from './pages/dashboard/RekomendasiAgronomi';
-import { ManajemenLahan } from './pages/dashboard/ManajemenLahan';
-import { PrediksiPanen } from './pages/dashboard/PrediksiPanen';
 import { Keuangan } from './pages/dashboard/Keuangan';
+import { ManajemenLahan } from './pages/dashboard/ManajemenLahan';
 import { Marketplace } from './pages/dashboard/Marketplace';
-import { AdminPanel } from './pages/dashboard/AdminPanel';
-import DashboardPageTransition from './components/DashboardTransition';
+import { PrediksiPanen } from './pages/dashboard/PrediksiPanen';
+import { RekomendasiAgronomi } from './pages/dashboard/RekomendasiAgronomi';
 import { WeatherRecommendationCard } from './pages/dashboard/Weather';
 
 export default function DashboardLayout() {
