@@ -114,19 +114,3 @@ function FooterColumn({
         </div>
     );
 }
-
-function SocialLink({ icon }: { icon: React.ReactNode }) {
-    return (
-        <button
-            className="
-        w-9 h-9 rounded-lg
-        bg-green-100 text-green-700
-        flex items-center justify-center
-        hover:bg-green-600 hover:text-white
-        transition
-      "
-        >
-            {icon}
-        </button>
-    );
-}
