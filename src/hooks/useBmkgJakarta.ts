@@ -14,13 +14,21 @@ export function useBmkgJakarta() {
         return res.json();
       })
       .then((json: any) => {
-        const area = json?.data?.[0]?.area?.[0];
-        const params = area?.parameter;
+        const areas = json?.data?.[0]?.area;
 
-        // 🛡️ GUARD PALING PENTING
-        if (!Array.isArray(params)) {
+        if (!Array.isArray(areas)) {
+          throw new Error("BMKG area tidak tersedia");
+        }
+
+        const area = areas.find(
+          (a: any) => Array.isArray(a.parameter)
+        );
+
+        if (!area) {
           throw new Error("BMKG parameter tidak tersedia");
         }
+
+        const params = area.parameter;
 
         const getLatestValue = (id: string): string => {
           const param = params.find((p: any) => p.id === id);
