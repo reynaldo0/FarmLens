@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
 import type { BmkgWeather } from "../types/weather";
 
+const API_BASE = "https://farmlens-dev.vercel.app";
+
 export function useBmkgJakarta() {
   const [data, setData] = useState<BmkgWeather | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/bmkg")
-      .then((res) => res.json())
+    fetch(`${API_BASE}/api/bmkg`)
+      .then((res) => {
+        if (!res.ok) throw new Error("BMKG fetch failed");
+        return res.json();
+      })
       .then((json: any) => {
-        const area = json.data[0].area[0];
-        const params = area.parameter as any[];
+        const area = json.data?.[0]?.area?.[0];
+        const params = area?.parameter as any[];
 
         const get = (id: string): string =>
-          params.find((p: any) => p.id === id)?.timerange?.[0]?.value?.[0]
-            ?.text ?? "0";
+          params?.find((p: any) => p.id === id)
+            ?.timerange?.[0]?.value?.[0]?.text ?? "0";
 
         setData({
           suhu: Number(get("t")),
@@ -23,6 +28,10 @@ export function useBmkgJakarta() {
           cuaca: get("weather"),
         });
 
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("BMKG error:", err);
         setLoading(false);
       });
   }, []);
