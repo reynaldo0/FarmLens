@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import HeroModel from '../../components/models/Logo';
+import { Suspense } from 'react';
+import HeroModelLoader from '../../components/models/LogoLoader';
 
 export default function HeroSection() {
     return (
@@ -72,9 +74,12 @@ export default function HeroSection() {
                     <div className="relative h-125">
                         <div className="absolute -inset-4 bg-linear-to-r from-green-400 to-emerald-400 rounded-3xl blur-2xl opacity-20"></div>
 
-                        <div className="relative w-full h-full rounded-3xl ">
-                            <HeroModel />
+                        <div className="relative w-full h-full rounded-3xl overflow-hidden">
+                            <Suspense fallback={<HeroModelLoader />}>
+                                <HeroModel />
+                            </Suspense>
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -1,72 +1,57 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import {
-    OrbitControls,
-    useGLTF,
     Environment,
-    Float
+    Float,
+    useGLTF
 } from '@react-three/drei';
-import { useRef, type JSX } from 'react';
+import { useRef } from 'react';
 import type { Group } from 'three';
+import type { JSX } from 'react';
 
 function Model(props: JSX.IntrinsicElements['group']) {
     const { scene } = useGLTF('/logo.glb');
     const ref = useRef<Group>(null);
 
+    // ✅ SATU animasi ringan saja
     useFrame(({ clock }) => {
         if (!ref.current) return;
         const t = clock.getElapsedTime();
 
-        ref.current.rotation.y = t * 0.8;
-        ref.current.rotation.x = Math.sin(t * 0.6) * 0.15;
-        ref.current.position.y = Math.sin(t * 1.2) * 0.2;
+        ref.current.rotation.y = t * 0.4;
+        ref.current.position.y = Math.sin(t) * 0.12;
     });
 
     return (
         <primitive
             ref={ref}
             object={scene}
-            scale={2.3}
+            scale={2}
             {...props}
         />
     );
 }
+
 export default function HeroModel() {
     return (
         <Canvas
             camera={{ position: [0, 0, 4], fov: 40 }}
             className="rounded-3xl"
         >
-            {/* Base light */}
-            <ambientLight intensity={0.7} />
+            {/* Lighting minimal & aman */}
+            <ambientLight intensity={0.6} />
+            <directionalLight position={[5, 5, 5]} intensity={1} />
 
-            {/* Key light */}
-            <directionalLight position={[5, 5, 5]} intensity={1.2} />
-
-            {/* Rim light */}
-            <directionalLight
-                position={[-5, 3, -5]}
-                intensity={0.6}
-                color="#d1fae5"
-            />
-
+            {/* Environment ringan */}
             <Environment preset="forest" />
 
-            {/* Floating animation */}
+            {/* Floating HALUS */}
             <Float
-                speed={1.2}
-                rotationIntensity={0.4}
-                floatIntensity={0.6}
+                speed={1}
+                rotationIntensity={0.3}
+                floatIntensity={0.4}
             >
                 <Model />
             </Float>
-
-            <OrbitControls
-                enableZoom={false}
-                enablePan={false}
-                autoRotate
-                autoRotateSpeed={0.6}
-                target={[0, 0, 0]}
-            />
         </Canvas>
     );
 }
