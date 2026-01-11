@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import HeroModel from '../../components/models/Logo';
 
 export default function HeroSection() {
     return (
@@ -68,14 +69,12 @@ export default function HeroSection() {
                             </div>
                         </div>
                     </div>
-
-                    <div className="relative">
+                    <div className="relative h-125">
                         <div className="absolute -inset-4 bg-linear-to-r from-green-400 to-emerald-400 rounded-3xl blur-2xl opacity-20"></div>
-                        <img
-                            src="https://images.unsplash.com/photo-1617532740648-0946d1110179?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1cmJhbiUyMGZhcm1pbmclMjB2ZWdldGFibGVzfGVufDF8fHx8MTc2Nzk3MDQ0MXww&ixlib=rb-4.1.0&q=80&w=1080"
-                            alt="Urban Farming"
-                            className="relative rounded-3xl shadow-2xl w-full h-125 object-cover"
-                        />
+
+                        <div className="relative w-full h-full rounded-3xl ">
+                            <HeroModel />
+                        </div>
                     </div>
                 </div>
             </div>
