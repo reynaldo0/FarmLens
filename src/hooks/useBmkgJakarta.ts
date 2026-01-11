@@ -14,38 +14,24 @@ export function useBmkgJakarta() {
         return res.json();
       })
       .then((json: any) => {
-        const areas = json?.data?.[0]?.area;
+        const cuacaGroup = json?.data?.[0]?.cuaca;
 
-        if (!Array.isArray(areas)) {
-          throw new Error("BMKG area tidak tersedia");
+        if (!Array.isArray(cuacaGroup)) {
+          throw new Error("BMKG cuaca tidak tersedia");
         }
 
-        const area = areas.find(
-          (a: any) => Array.isArray(a.parameter)
-        );
+        // 🔥 Ambil prakiraan TERDEKAT
+        const nearest = cuacaGroup.flat()?.[0];
 
-        if (!area) {
-          throw new Error("BMKG parameter tidak tersedia");
+        if (!nearest) {
+          throw new Error("BMKG data cuaca kosong");
         }
-
-        const params = area.parameter;
-
-        const getLatestValue = (id: string): string => {
-          const param = params.find((p: any) => p.id === id);
-          if (!param?.timerange?.length) return "0";
-
-          const latest = param.timerange[param.timerange.length - 1];
-          const value = latest?.value?.[0]?.text;
-
-          if (!value || value === "-" || value === "") return "0";
-          return value;
-        };
 
         setData({
-          suhu: Number(getLatestValue("t")),
-          kelembaban: Number(getLatestValue("hu")),
-          hujan: Number(getLatestValue("tp")),
-          cuaca: getLatestValue("weather"),
+          suhu: Number(nearest.t),
+          kelembaban: Number(nearest.hu),
+          hujan: Number(nearest.tp),
+          cuaca: nearest.weather_desc,
         });
 
         setLoading(false);
