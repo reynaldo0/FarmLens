@@ -14,14 +14,18 @@ export function useBmkgJakarta() {
         return res.json();
       })
       .then((json: any) => {
-        const area = json.data?.[0]?.area?.[0];
-        const params = area?.parameter as any[];
+        const area = json?.data?.[0]?.area?.[0];
+        const params = area?.parameter;
+
+        // 🛡️ GUARD PALING PENTING
+        if (!Array.isArray(params)) {
+          throw new Error("BMKG parameter tidak tersedia");
+        }
 
         const getLatestValue = (id: string): string => {
           const param = params.find((p: any) => p.id === id);
           if (!param?.timerange?.length) return "0";
 
-          // ⬅️ ambil data PALING BARU
           const latest = param.timerange[param.timerange.length - 1];
           const value = latest?.value?.[0]?.text;
 
@@ -40,6 +44,7 @@ export function useBmkgJakarta() {
       })
       .catch((err) => {
         console.error("BMKG error:", err);
+        setData(null);
         setLoading(false);
       });
   }, []);
