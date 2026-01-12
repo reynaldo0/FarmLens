@@ -7,7 +7,7 @@ import {
     ShieldCheck,
     Info,
 } from "lucide-react";
-import type { Season } from "../types/weather";
+import type { Season } from "../utils/detectSeason";
 
 type RiskLevel = "rendah" | "sedang" | "tinggi";
 
@@ -142,10 +142,10 @@ export function PestPredictionCard({ crop, lahanStatus, season }: Props) {
 
                 <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold ${highestRisk === "tinggi"
-                            ? "bg-red-50 text-red-700 ring-1 ring-red-200"
-                            : highestRisk === "sedang"
-                                ? "bg-amber-50 text-amber-700 ring-1 ring-amber-200"
-                                : "bg-green-50 text-green-700 ring-1 ring-green-200"
+                        ? "bg-red-50 text-red-700 ring-1 ring-red-200"
+                        : highestRisk === "sedang"
+                            ? "bg-amber-50 text-amber-700 ring-1 ring-amber-200"
+                            : "bg-green-50 text-green-700 ring-1 ring-green-200"
                         }`}
                 >
                     Risiko {highestRisk}

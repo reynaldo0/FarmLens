@@ -3,6 +3,7 @@ import { BELAJAR_CONTENT, type TabType } from '../data/belajarData';
 import ProgressBar from './belajar/ProgressBar';
 import Tabs from './belajar/Tabs';
 import AccordionItem from './belajar/Accordion';
+import { Link } from 'react-router-dom';
 
 export default function Belajar() {
     const [activeTab, setActiveTab] = useState<TabType>('tanaman');
@@ -64,12 +65,12 @@ export default function Belajar() {
                     <p className="mb-6 text-green-50">
                         Gunakan Kamus Tanaman untuk mendeteksi penyakit tanaman
                     </p>
-                    <a
-                        href="/kamus"
+                    <Link
+                        to={'/kamus'}
                         className="bg-white text-green-700 px-8 py-3 rounded-xl font-medium"
                     >
                         Buka Kamus Tanaman
-                    </a>
+                    </Link>
                 </div>
 
             </div>

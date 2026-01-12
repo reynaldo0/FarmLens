@@ -10,6 +10,7 @@ import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YA
 
 import { useWeather } from '../../hooks/useWeather';
 import { useBmkgJakarta } from '../../hooks/useBmkgJakarta';
+import { DashboardOverviewSkeleton } from '../../components/DashboardSkeleton';
 
 const trendData = [
     { bulan: 'Jan', kesehatan: 85 },
@@ -27,7 +28,7 @@ export function DashboardOverview() {
     const weather = useWeather(cuaca);
 
     if (loading || !cuaca) {
-        return <p>Memuat cuaca BMKG…</p>;
+        return <DashboardOverviewSkeleton />;
     }
 
     const hujanLebat = cuaca.hujan >= 20;
