@@ -17,6 +17,7 @@ const menuItems = [
     { path: 'rekomendasi', label: 'Rekomendasi', icon: ClipboardList, role: 'petani' },
     { path: 'lahan', label: 'Manajemen Lahan', icon: Map, role: 'petani' },
     { path: 'panen', label: 'Prediksi Panen', icon: TrendingUp, role: 'petani' },
+    { path: 'hama', label: 'Prediksi Hama', icon: TrendingUp, role: 'petani' },
     { path: 'keuangan', label: 'Keuangan', icon: Wallet, role: 'petani' },
     { path: 'weather', label: 'Cuaca', icon: TrendingUp, role: 'petani' },
     { path: 'marketplace', label: 'Marketplace', icon: ShoppingCart, role: 'all' },
