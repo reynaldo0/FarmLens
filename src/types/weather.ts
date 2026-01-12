@@ -12,3 +12,8 @@ export type WeatherInsight = {
   actionTitle: string;
   actionDescription: string;
 };
+
+export type BmkgDaily = {
+  dateISO: string;
+  rainMm: number;
+};

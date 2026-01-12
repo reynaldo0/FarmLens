@@ -1,6 +1,8 @@
 import {
     ArrowLeft,
+    Bug,
     ClipboardList,
+    CloudSun,
     LayoutDashboard,
     Leaf,
     Map,
@@ -12,16 +14,66 @@ import {
 import { Link, NavLink } from 'react-router-dom';
 
 const menuItems = [
-    { path: 'overview', label: 'Dashboard', icon: LayoutDashboard, role: 'petani' },
-    { path: 'deteksi', label: 'Deteksi Penyakit', icon: Leaf, role: 'petani' },
-    { path: 'rekomendasi', label: 'Rekomendasi', icon: ClipboardList, role: 'petani' },
-    { path: 'lahan', label: 'Manajemen Lahan', icon: Map, role: 'petani' },
-    { path: 'panen', label: 'Prediksi Panen', icon: TrendingUp, role: 'petani' },
-    { path: 'hama', label: 'Prediksi Hama', icon: TrendingUp, role: 'petani' },
-    { path: 'keuangan', label: 'Keuangan', icon: Wallet, role: 'petani' },
-    { path: 'weather', label: 'Cuaca', icon: TrendingUp, role: 'petani' },
-    { path: 'marketplace', label: 'Marketplace', icon: ShoppingCart, role: 'all' },
-    { path: 'admin', label: 'Admin', icon: Shield, role: 'petani' },
+    {
+        path: "overview",
+        label: "Dashboard",
+        icon: LayoutDashboard,
+        role: "petani",
+    },
+    {
+        path: "deteksi",
+        label: "Deteksi Penyakit",
+        icon: Leaf, // tanaman + penyakit
+        role: "petani",
+    },
+    {
+        path: "rekomendasi",
+        label: "Rekomendasi",
+        icon: ClipboardList, // checklist / saran
+        role: "petani",
+    },
+    {
+        path: "lahan",
+        label: "Manajemen Lahan",
+        icon: Map, // lokasi lahan
+        role: "petani",
+    },
+    {
+        path: "panen",
+        label: "Prediksi Panen",
+        icon: TrendingUp, // growth / yield
+        role: "petani",
+    },
+    {
+        path: "hama",
+        label: "Prediksi Hama",
+        icon: Bug, // 🔥 paling tepat
+        role: "petani",
+    },
+    {
+        path: "keuangan",
+        label: "Keuangan",
+        icon: Wallet, // uang / cashflow
+        role: "petani",
+    },
+    {
+        path: "weather",
+        label: "Cuaca",
+        icon: CloudSun, // cuaca (lebih jelas dari TrendingUp)
+        role: "petani",
+    },
+    {
+        path: "marketplace",
+        label: "Marketplace",
+        icon: ShoppingCart,
+        role: "all",
+    },
+    {
+        path: "admin",
+        label: "Admin",
+        icon: Shield,
+        role: "petani",
+    },
 ];
 
 export default function Sidebar({ setSidebarOpen, userRole }: any) {

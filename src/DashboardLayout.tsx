@@ -14,8 +14,8 @@ import { ManajemenLahan } from './pages/dashboard/ManajemenLahan';
 import { Marketplace } from './pages/dashboard/Marketplace';
 import { PrediksiPanen } from './pages/dashboard/PrediksiPanen';
 import { RekomendasiAgronomi } from './pages/dashboard/RekomendasiAgronomi';
+import { HamaPrediction } from './pages/dashboard/HamaPrediction';
 import { WeatherRecommendationCard } from './pages/dashboard/Weather';
-import { PestPredictionCard } from './pages/dashboard/RiskPrediction';
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -91,7 +91,7 @@ export default function DashboardLayout() {
                                 path="hama"
                                 element={
                                     <DashboardPageTransition>
-                                        <PestPredictionCard />
+                                        <HamaPrediction />
                                     </DashboardPageTransition>
                                 }
                             />
