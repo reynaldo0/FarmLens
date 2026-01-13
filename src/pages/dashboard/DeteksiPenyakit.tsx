@@ -1,283 +1,381 @@
-import { AlertCircle, Camera, CheckCircle2, Info, Upload } from 'lucide-react';
-import React, { useState } from 'react';
+import {
+    AlertCircle,
+    Camera,
+    CheckCircle2,
+    Info,
+    X,
+    Phone
+} from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
 
-export function DeteksiPenyakit() {
-    const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-    const [analyzing, setAnalyzing] = useState(false);
-    const [result, setResult] = useState<any>(null);
+/* ================= CONFIG ================= */
+const USER_ID = 'FarmlensAcc';
+const PENYULUH_WA = '62895384435283';
 
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setUploadedImage(reader.result as string);
-                setResult(null);
-                // Simulate analysis after upload
-                setTimeout(() => {
-                    setAnalyzing(true);
-                    setTimeout(() => {
-                        setAnalyzing(false);
-                        // Mock result
-                        setResult({
-                            disease: 'Bercak Daun (Leaf Spot)',
-                            confidence: 87,
-                            severity: 'Sedang',
-                            risk: 'medium',
-                            recommendations: [
-                                'Pangkas daun yang terinfeksi dan buang dari area lahan',
-                                'Semprot fungisida berbahan aktif mankozeb atau klorotalonil',
-                                'Tingkatkan sirkulasi udara antar tanaman',
-                                'Kurangi kelembaban dengan mengatur irigasi',
-                                'Monitor perkembangan setiap 3-5 hari'
-                            ],
-                            prevention: [
-                                'Rotasi tanaman setiap musim',
-                                'Jaga jarak tanam optimal',
-                                'Gunakan benih bersertifikat',
-                                'Sanitasi lahan secara berkala'
-                            ]
-                        });
-                    }, 2000);
-                }, 300);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+/* ================= TYPES ================= */
+type DetectionHistory = {
+    id: string;
+    image: string;
+    date: string;
+    result: any;
+};
 
-    const getRiskColor = (risk: string) => {
-        switch (risk) {
-            case 'low': return 'text-green-700 bg-green-100 border-green-200';
-            case 'medium': return 'text-amber-700 bg-amber-100 border-amber-200';
-            case 'high': return 'text-red-700 bg-red-100 border-red-200';
-            default: return 'text-gray-700 bg-gray-100 border-gray-200';
-        }
-    };
+/* ================= ANALYSIS RESULT ================= */
+function AnalysisResult({
+    result,
+    onSave,
+    onContact
+}: {
+    result: any;
+    onSave?: () => void;
+    onContact?: () => void;
+}) {
+    const riskStyle = {
+        low: 'bg-green-100 text-green-700',
+        medium: 'bg-amber-100 text-amber-700',
+        high: 'bg-red-100 text-red-700'
+    }[result.risk];
 
     return (
         <div className="space-y-6">
             {/* Header */}
-            <div>
-                <h2 className="text-gray-900">Deteksi Penyakit Tanaman</h2>
-                <p className="text-gray-500 mt-1">
-                    Unggah foto tanaman untuk analisis penyakit menggunakan AI
-                </p>
+            <div className="flex items-start justify-between">
+                <div>
+                    <p className="text-sm text-gray-500">Terdeteksi</p>
+                    <h3 className="text-xl font-semibold">{result.disease}</h3>
+                </div>
+                <span className={`px-3 py-1 text-sm rounded-full ${riskStyle}`}>
+                    {result.severity}
+                </span>
             </div>
 
-            {/* Info Banner */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
-                <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                <div>
-                    <p className="text-blue-900">Tips untuk hasil terbaik:</p>
-                    <ul className="text-sm text-blue-700 mt-2 space-y-1 list-disc list-inside">
-                        <li>Ambil foto di siang hari dengan pencahayaan yang baik</li>
-                        <li>Fokus pada bagian tanaman yang menunjukkan gejala</li>
-                        <li>Pastikan foto jelas dan tidak buram</li>
-                        <li>Sertakan daun atau batang yang terinfeksi</li>
-                    </ul>
+            {/* Confidence */}
+            <div>
+                <div className="flex justify-between text-sm mb-1">
+                    <span className="text-gray-600">Tingkat Keyakinan</span>
+                    <span className="font-medium">{result.confidence}%</span>
+                </div>
+                <div className="h-2 bg-gray-200 rounded-full">
+                    <div
+                        className="h-2 bg-green-500 rounded-full transition-all"
+                        style={{ width: `${result.confidence}%` }}
+                    />
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Upload Area */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
-                    <h3 className="text-gray-900 mb-4">Upload Foto Tanaman</h3>
+            {/* Alert */}
+            {result.risk !== 'low' && (
+                <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
+                    <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5" />
+                    <div>
+                        <p className="font-medium text-amber-900">
+                            Perlu Tindakan
+                        </p>
+                        <p className="text-sm text-amber-700">
+                            Penyakit berpotensi menyebar jika tidak ditangani
+                        </p>
+                    </div>
+                </div>
+            )}
 
-                    {!uploadedImage ? (
-                        <label className="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer hover:border-green-500 hover:bg-green-50 transition-colors min-h-[400px]">
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                                className="hidden"
-                            />
-                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                                <Upload className="w-8 h-8 text-green-600" />
+            {/* Recommendations */}
+            <div>
+                <p className="font-medium mb-3">Rekomendasi Penanganan</p>
+                <div className="space-y-2">
+                    {result.recommendations.map((rec: string, i: number) => (
+                        <div
+                            key={i}
+                            className="flex gap-3 p-3 rounded-xl bg-gray-50"
+                        >
+                            <div className="w-6 h-6 rounded-full bg-green-600 text-white flex items-center justify-center text-xs">
+                                {i + 1}
                             </div>
-                            <p className="text-gray-900 mb-2">Klik untuk unggah foto</p>
-                            <p className="text-sm text-gray-500 text-center">
-                                atau seret dan letakkan file di sini
-                            </p>
-                            <p className="text-xs text-gray-400 mt-2">
-                                PNG, JPG hingga 10MB
-                            </p>
-                        </label>
-                    ) : (
-                        <div className="space-y-4">
-                            <div className="relative rounded-xl overflow-hidden border border-gray-200">
-                                <img
-                                    src={uploadedImage}
-                                    alt="Uploaded plant"
-                                    className="w-full h-auto max-h-[400px] object-contain bg-gray-50"
-                                />
-                            </div>
+                            <p className="text-sm">{rec}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Prevention */}
+            <div>
+                <p className="font-medium mb-3">Pencegahan</p>
+                <ul className="space-y-2">
+                    {result.prevention.map((p: string, i: number) => (
+                        <li key={i} className="flex gap-2 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                            {p}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Actions */}
+            <div className="flex gap-3 pt-4 border-t">
+                {onSave && (
+                    <button
+                        onClick={onSave}
+                        className="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-medium transition"
+                    >
+                        Simpan Hasil
+                    </button>
+                )}
+
+                <button
+                    onClick={onContact}
+                    className="flex-1 border py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition"
+                >
+                    <Phone className="w-4 h-4" />
+                    Hubungi Penyuluh
+                </button>
+            </div>
+        </div>
+    );
+}
+
+/* ================= MAIN ================= */
+export function DeteksiPenyakit() {
+    const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+    const [result, setResult] = useState<any>(null);
+    const [analyzing, setAnalyzing] = useState(false);
+    const [history, setHistory] = useState<DetectionHistory[]>([]);
+    const [selectedHistory, setSelectedHistory] = useState<DetectionHistory | null>(null);
+    const [activeTab, setActiveTab] = useState<'upload' | 'camera'>('upload');
+
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const streamRef = useRef<MediaStream | null>(null);
+
+    const mockResult = {
+        disease: 'Bercak Daun (Leaf Spot)',
+        confidence: 87,
+        severity: 'Sedang',
+        risk: 'medium',
+        recommendations: [
+            'Pangkas daun yang terinfeksi',
+            'Semprot fungisida sesuai dosis',
+            'Perbaiki sirkulasi udara',
+            'Kurangi kelembaban'
+        ],
+        prevention: [
+            'Rotasi tanaman',
+            'Gunakan benih sehat',
+            'Sanitasi lahan'
+        ]
+    };
+
+    useEffect(() => {
+        const saved = localStorage.getItem(`detections_${USER_ID}`);
+        if (saved) setHistory(JSON.parse(saved));
+    }, []);
+
+    const saveHistory = (image: string, result: any) => {
+        const item = {
+            id: crypto.randomUUID(),
+            image,
+            date: new Date().toLocaleString('id-ID'),
+            result
+        };
+        const updated = [item, ...history];
+        setHistory(updated);
+        localStorage.setItem(`detections_${USER_ID}`, JSON.stringify(updated));
+    };
+
+    const runAnalysis = (image: string) => {
+        setAnalyzing(true);
+        setResult(null);
+        setTimeout(() => {
+            setAnalyzing(false);
+            setResult(mockResult);
+            saveHistory(image, mockResult);
+        }, 1800);
+    };
+
+    const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const img = reader.result as string;
+            setUploadedImage(img);
+            runAnalysis(img);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const startCamera = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: 'environment' }
+            });
+            streamRef.current = stream;
+            if (videoRef.current) videoRef.current.srcObject = stream;
+        } catch {
+            alert('Kamera tidak dapat diakses');
+        }
+    };
+
+    const stopCamera = () => {
+        streamRef.current?.getTracks().forEach(t => t.stop());
+        streamRef.current = null;
+    };
+
+    const capturePhoto = () => {
+        if (!videoRef.current) return;
+        const canvas = document.createElement('canvas');
+        canvas.width = videoRef.current.videoWidth;
+        canvas.height = videoRef.current.videoHeight;
+        canvas.getContext('2d')?.drawImage(videoRef.current, 0, 0);
+        const img = canvas.toDataURL('image/png');
+        stopCamera();
+        setUploadedImage(img);
+        runAnalysis(img);
+    };
+
+    const resetUpload = () => {
+        stopCamera();
+        setUploadedImage(null);
+        setResult(null);
+        setAnalyzing(false);
+    };
+
+    const contactPenyuluh = () => {
+        window.open(`https://wa.me/${PENYULUH_WA}`, '_blank');
+    };
+
+    return (
+        <div className="space-y-8">
+            {/* Header */}
+            <div>
+                <h2 className="text-2xl font-semibold">Deteksi Penyakit Tanaman</h2>
+                <p className="text-gray-500">Analisis AI berbasis foto tanaman</p>
+            </div>
+
+            {/* Main */}
+            <div className="grid lg:grid-cols-2 gap-6">
+                {/* Upload Card */}
+                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-4">
+                    {/* Tabs */}
+                    <div className="flex bg-gray-100 rounded-xl p-1">
+                        {['upload', 'camera'].map(tab => (
                             <button
+                                key={tab}
                                 onClick={() => {
-                                    setUploadedImage(null);
-                                    setResult(null);
-                                    setAnalyzing(false);
+                                    setActiveTab(tab as any);
+                                    tab === 'camera' ? startCamera() : stopCamera();
                                 }}
-                                className="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                                className={`flex-1 py-2 rounded-lg text-sm font-medium transition
+                                    ${activeTab === tab
+                                        ? 'bg-white shadow text-green-600'
+                                        : 'text-gray-500 hover:text-gray-700'
+                                    }`}
                             >
-                                Unggah Foto Lain
+                                {tab === 'upload' ? 'Upload' : 'Kamera'}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Content */}
+                    {!uploadedImage && activeTab === 'upload' && (
+                        <label className="border-2 border-dashed rounded-2xl p-10 flex flex-col items-center cursor-pointer hover:bg-gray-50 transition">
+                            <Camera className="w-10 h-10 text-green-600 mb-2" />
+                            <p className="font-medium">Upload Foto</p>
+                            <p className="text-sm text-gray-500">JPG / PNG</p>
+                            <input hidden type="file" accept="image/*" onChange={handleUpload} />
+                        </label>
+                    )}
+
+                    {!uploadedImage && activeTab === 'camera' && (
+                        <div className="space-y-4">
+                            <video ref={videoRef} autoPlay playsInline className="rounded-xl border" />
+                            <button
+                                onClick={capturePhoto}
+                                className="w-full bg-green-600 text-white py-3 rounded-xl font-medium hover:bg-green-700 transition"
+                            >
+                                Ambil Foto
+                            </button>
+                        </div>
+                    )}
+
+                    {uploadedImage && (
+                        <div className="space-y-4">
+                            <img src={uploadedImage} className="rounded-xl border" />
+                            <button
+                                onClick={resetUpload}
+                                className="w-full py-3 rounded-xl border hover:bg-gray-50 transition"
+                            >
+                                Ganti Foto
                             </button>
                         </div>
                     )}
 
                     {analyzing && (
-                        <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                            <div className="flex items-center gap-3">
-                                <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
-                                <p className="text-blue-900">Menganalisis foto...</p>
-                            </div>
+                        <div className="flex items-center gap-2 p-3 rounded-xl bg-blue-50 text-blue-700">
+                            <Info className="animate-pulse" />
+                            AI sedang menganalisis gambar...
                         </div>
                     )}
                 </div>
 
-                {/* Results */}
-                <div className="bg-white rounded-xl border border-gray-200 p-6">
-                    <h3 className="text-gray-900 mb-4">Hasil Analisis</h3>
-
+                {/* Result */}
+                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
                     {!result && !analyzing && (
-                        <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
-                            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                                <Camera className="w-8 h-8 text-gray-400" />
-                            </div>
-                            <p className="text-gray-500">Unggah foto untuk melihat hasil analisis</p>
-                        </div>
+                        <p className="text-center text-gray-400">
+                            Hasil analisis akan muncul di sini
+                        </p>
                     )}
 
                     {result && (
-                        <div className="space-y-6">
-                            {/* Disease Info */}
-                            <div>
-                                <div className="flex items-start justify-between mb-3">
-                                    <div>
-                                        <p className="text-gray-600 text-sm mb-1">Terdeteksi</p>
-                                        <p className="text-xl text-gray-900">{result.disease}</p>
-                                    </div>
-                                    <div className={`px-3 py-1 rounded-full border ${getRiskColor(result.risk)}`}>
-                                        {result.severity}
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-2 text-sm">
-                                    <span className="text-gray-600">Tingkat Keyakinan:</span>
-                                    <div className="flex-1 bg-gray-200 rounded-full h-2">
-                                        <div
-                                            className="bg-green-500 h-2 rounded-full"
-                                            style={{ width: `${result.confidence}%` }}
-                                        />
-                                    </div>
-                                    <span className="text-gray-900">{result.confidence}%</span>
-                                </div>
-                            </div>
-
-                            {/* Risk Alert */}
-                            {result.risk === 'medium' && (
-                                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-3">
-                                    <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                                    <div>
-                                        <p className="text-amber-900">Perlu Tindakan Segera</p>
-                                        <p className="text-sm text-amber-700 mt-1">
-                                            Penyakit ini dapat menyebar jika tidak ditangani dengan cepat
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-
-                            {result.risk === 'low' && (
-                                <div className="p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
-                                    <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                                    <div>
-                                        <p className="text-green-900">Tingkat Risiko Rendah</p>
-                                        <p className="text-sm text-green-700 mt-1">
-                                            Penanganan preventif sudah cukup untuk mengendalikan penyakit
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Recommendations */}
-                            <div>
-                                <p className="text-gray-900 mb-3">Rekomendasi Penanganan</p>
-                                <div className="space-y-2">
-                                    {result.recommendations.map((rec: string, idx: number) => (
-                                        <div key={idx} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                                            <div className="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm">
-                                                {idx + 1}
-                                            </div>
-                                            <p className="text-sm text-gray-700">{rec}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Prevention */}
-                            <div>
-                                <p className="text-gray-900 mb-3">Pencegahan ke Depan</p>
-                                <ul className="space-y-2">
-                                    {result.prevention.map((prev: string, idx: number) => (
-                                        <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
-                                            <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                                            {prev}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* Action Buttons */}
-                            <div className="flex gap-3 pt-4 border-t border-gray-200">
-                                <button className="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                                    Simpan Hasil
-                                </button>
-                                <button className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                                    Hubungi Penyuluh
-                                </button>
-                            </div>
-                        </div>
+                        <AnalysisResult
+                            result={result}
+                            onSave={() => saveHistory(uploadedImage!, result)}
+                            onContact={contactPenyuluh}
+                        />
                     )}
                 </div>
             </div>
 
-            {/* History Section */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <h3 className="text-gray-900 mb-4">Riwayat Deteksi</h3>
-                <div className="space-y-3">
-                    <div className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:border-green-300 transition-colors cursor-pointer">
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg flex-shrink-0" />
-                        <div className="flex-1">
-                            <p className="text-gray-900">Hawar Daun Bakteri</p>
-                            <p className="text-sm text-gray-600">Lahan A - Padi • 25 Jun 2025</p>
-                        </div>
-                        <div className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm border border-red-200">
-                            Tinggi
-                        </div>
-                    </div>
+            {/* History */}
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+                <h3 className="font-semibold mb-4">Riwayat Deteksi</h3>
 
-                    <div className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:border-green-300 transition-colors cursor-pointer">
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg flex-shrink-0" />
-                        <div className="flex-1">
-                            <p className="text-gray-900">Karat Daun</p>
-                            <p className="text-sm text-gray-600">Lahan B - Jagung • 18 Jun 2025</p>
-                        </div>
-                        <div className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm border border-amber-200">
-                            Sedang
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:border-green-300 transition-colors cursor-pointer">
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg flex-shrink-0" />
-                        <div className="flex-1">
-                            <p className="text-gray-900">Tanaman Sehat</p>
-                            <p className="text-sm text-gray-600">Lahan D - Tomat • 12 Jun 2025</p>
-                        </div>
-                        <div className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm border border-green-200">
-                            Sehat
-                        </div>
-                    </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {history.map(item => (
+                        <button
+                            key={item.id}
+                            onClick={() => setSelectedHistory(item)}
+                            className="rounded-xl border hover:shadow-md transition text-left overflow-hidden"
+                        >
+                            <img src={item.image} className="h-32 w-full object-cover" />
+                            <div className="p-3">
+                                <p className="font-medium text-sm">{item.result.disease}</p>
+                                <p className="text-xs text-gray-500">{item.date}</p>
+                            </div>
+                        </button>
+                    ))}
                 </div>
             </div>
+
+            {/* Modal */}
+            {selectedHistory && (
+                <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center ">
+                    <div
+                        onClick={() => setSelectedHistory(null)}
+                        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                    />
+                    <div className="relative bg-white w-full md:max-w-3xl rounded-t-2xl md:rounded-2xl max-h-[90vh] overflow-y-auto p-16">
+                        <button
+                            onClick={() => setSelectedHistory(null)}
+                            className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
+                        >
+                            <X />
+                        </button>
+
+                        <AnalysisResult
+                            result={selectedHistory.result}
+                            onContact={contactPenyuluh}
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
