@@ -173,7 +173,7 @@ export function WeatherRecommendationCard() {
         <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`relative rounded-3xl overflow-hidden bg-linear-to-br  ${conditionGradient(
+            className={`relative rounded-3xl overflow-hidden bg-gradient-to-br  ${conditionGradient(
                 data.today.condition
             )} ring-1 ring-black/5 shadow-2xl`}
         >
