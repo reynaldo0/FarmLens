@@ -11,11 +11,11 @@ import { DashboardOverview } from './pages/dashboard/DashboardOverview';
 import { DeteksiPenyakit } from './pages/dashboard/DeteksiPenyakit';
 import { Keuangan } from './pages/dashboard/Keuangan';
 import { ManajemenLahan } from './pages/dashboard/ManajemenLahan';
-import { Marketplace } from './pages/dashboard/Marketplace';
 import { PrediksiPanen } from './pages/dashboard/PrediksiPanen';
 import { RekomendasiAgronomi } from './pages/dashboard/RekomendasiAgronomi';
 import { HamaPrediction } from './pages/dashboard/HamaPrediction';
 import { WeatherRecommendationCard } from './pages/dashboard/Weather';
+import Marketplace from './pages/dashboard/Marketplace';
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
