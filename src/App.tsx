@@ -12,10 +12,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Community from './pages/Community';
 import Chatbot from './pages/ChatBot';
+import FloatingChatbot from './components/FloatingChatbot';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
 
         {/* PUBLIC */}
@@ -42,8 +45,8 @@ export default function App() {
           }
         />
 
-
       </Routes>
+      <FloatingChatbot />
     </BrowserRouter>
   );
 }
