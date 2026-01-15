@@ -20,7 +20,7 @@ export default function Login() {
     };
 
     setAuth(user);
-    navigate("/dashboard");
+    navigate("/dashboard/overview");
   };
 
   return (

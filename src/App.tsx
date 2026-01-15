@@ -10,6 +10,7 @@ import KamusTanaman from './pages/Kamus';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Community from './pages/Community';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/belajar" element={<Belajar />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/kamus" element={<KamusTanaman />} />
+          <Route path="/komunitas" element={<Community />} />
         </Route>
 
         {/* DASHBOARD */}

@@ -21,7 +21,7 @@ export default function Register() {
         };
 
         setAuth(user);
-        navigate("/dashboard");
+        navigate("/dashboard/overview");
     };
 
     return (

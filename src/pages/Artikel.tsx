@@ -3,6 +3,7 @@ import { CategoryFilter } from './artikel/CategoryFilter';
 import { articles, categories } from '../data/articleData';
 import { FeaturedArticle } from './artikel/FeaturedArticle';
 import { ArticleCard } from './artikel/ArticleCard';
+import CommunityCTA from './artikel/CTA';
 
 export default function Artikel() {
     const [selectedCategory, setSelectedCategory] = useState('all');
@@ -50,6 +51,7 @@ export default function Artikel() {
                     ))}
                 </div>
 
+            <CommunityCTA />
             </div>
         </div>
     );
