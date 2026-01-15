@@ -6,10 +6,9 @@ import {
     LayoutDashboard,
     Leaf,
     Map,
-    Shield,
     ShoppingCart,
     TrendingUp,
-    Wallet,
+    Wallet
 } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import DashboardHeader from './components/DashboardHeader';
 import Sidebar from './components/DashboardSidebar';
@@ -9,13 +9,13 @@ import DashboardPageTransition from './components/DashboardTransition';
 import { AdminPanel } from './pages/dashboard/AdminPanel';
 import { DashboardOverview } from './pages/dashboard/DashboardOverview';
 import { DeteksiPenyakit } from './pages/dashboard/DeteksiPenyakit';
+import { HamaPrediction } from './pages/dashboard/HamaPrediction';
 import { Keuangan } from './pages/dashboard/Keuangan';
 import { ManajemenLahan } from './pages/dashboard/ManajemenLahan';
+import Marketplace from './pages/dashboard/Marketplace';
 import { PrediksiPanen } from './pages/dashboard/PrediksiPanen';
 import { RekomendasiAgronomi } from './pages/dashboard/RekomendasiAgronomi';
-import { HamaPrediction } from './pages/dashboard/HamaPrediction';
 import { WeatherRecommendationCard } from './pages/dashboard/Weather';
-import Marketplace from './pages/dashboard/Marketplace';
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function DashboardLayout() {
             <DashboardHeader
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
-                userRole={userRole}
+                
             />
 
             <div className="flex">

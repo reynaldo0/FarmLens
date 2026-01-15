@@ -13,7 +13,23 @@ import {
 import { useMemo, useState } from 'react';
 import { Toaster, toast } from 'sonner';
 
-const listings = [
+type MarketplaceItem = {
+  id: number;
+  komoditas: string;
+  petani: string;
+  lokasi: string;
+  volume: number;
+  volumeRange: string;
+  tanggalPanen: string;
+  harga: number;
+  kualitas: string;
+  reliabilitas: number;
+  rating: number;
+  status: 'available' | 'reserved';
+  verified: boolean;
+};
+
+const listings: MarketplaceItem[] = [
     {
         id: 1,
         komoditas: 'Padi - IR64',
@@ -109,7 +125,7 @@ const listings = [
 export default function Marketplace() {
     const [search, setSearch] = useState('');
     const [status, setStatus] = useState('all');
-    const [detail, setDetail] = useState(null);
+    const [detail, setDetail] = useState<MarketplaceItem | null>(null);
 
     const filtered = useMemo(() => {
         return listings.filter(item => {
@@ -148,7 +164,7 @@ export default function Marketplace() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 className="relative overflow-hidden rounded-3xl
-             bg-gradient-to-br from-green-50 via-white to-green-100
+             bg-linear-to-br from-green-50 via-white to-green-100
              border border-green-200 p-6
              flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
             >
@@ -271,7 +287,7 @@ export default function Marketplace() {
                                 onClick={() => setDetail(item)}
                                 className="flex-1 flex items-center justify-center gap-2
              px-4 py-2 rounded-xl
-             bg-gradient-to-r from-green-600 to-green-500
+             bg-linear-to-r from-green-600 to-green-500
              text-white shadow-md hover:brightness-110 transition"
                             >
 

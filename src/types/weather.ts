@@ -8,6 +8,7 @@ export type BmkgWeather = {
 export type WeatherRisk = "aman" | "waspada" | "bahaya";
 
 export type WeatherInsight = {
+  summary: string;
   risk: WeatherRisk;
   actionTitle: string;
   actionDescription: string;

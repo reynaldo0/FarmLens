@@ -47,7 +47,7 @@ export function DashboardOverview() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="relative overflow-hidden rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 via-white to-green-100 p-6"
+                className="relative overflow-hidden rounded-2xl border border-green-200 bg-linear-to-br from-green-50 via-white to-green-100 p-6"
             >
                 {/* Decorative blur */}
                 <div className="absolute -top-12 -right-12 w-40 h-40 bg-green-300/30 rounded-full blur-3xl" />

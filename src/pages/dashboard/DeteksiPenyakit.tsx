@@ -12,6 +12,17 @@ import React, { useEffect, useRef, useState } from 'react';
 /* ================= CONFIG ================= */
 const USER_ID = 'FarmlensAcc';
 const PENYULUH_WA = '62895384435283';
+type RiskLevel = 'low' | 'medium' | 'high';
+
+export type DetectionResult = {
+    disease: string;
+    confidence: number;
+    severity: string;
+    risk: RiskLevel;
+    recommendations: string[];
+    prevention: string[];
+};
+
 
 /* ================= TYPES ================= */
 type DetectionHistory = {
@@ -27,7 +38,7 @@ function AnalysisResult({
     onSave,
     onContact
 }: {
-    result: any;
+    result: DetectionResult;
     onSave?: () => void;
     onContact?: () => void;
 }) {
@@ -136,7 +147,7 @@ function AnalysisResult({
 /* ================= MAIN ================= */
 export function DeteksiPenyakit() {
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-    const [result, setResult] = useState<any>(null);
+    const [result, setResult] = useState<DetectionResult | null>(null);
     const [analyzing, setAnalyzing] = useState(false);
     const [history, setHistory] = useState<DetectionHistory[]>([]);
     const [selectedHistory, setSelectedHistory] = useState<DetectionHistory | null>(null);
@@ -168,7 +179,7 @@ export function DeteksiPenyakit() {
         if (saved) setHistory(JSON.parse(saved));
     }, []);
 
-    const saveHistory = (image: string, result: any) => {
+    const saveHistory = (image: string, result: DetectionResult) => {
         const item = {
             id: crypto.randomUUID(),
             image,
@@ -183,12 +194,16 @@ export function DeteksiPenyakit() {
     const runAnalysis = (image: string) => {
         setAnalyzing(true);
         setResult(null);
-        setTimeout(() => {
+
+        const timeoutId = window.setTimeout(() => {
             setAnalyzing(false);
             setResult(mockResult);
             saveHistory(image, mockResult);
         }, 1800);
+
+        return () => window.clearTimeout(timeoutId);
     };
+
 
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -278,15 +293,20 @@ export function DeteksiPenyakit() {
                 >
                     {/* Tabs */}
                     <div className="flex bg-gray-100 rounded-xl p-1">
-                        {['upload', 'camera'].map(tab => (
+                        {(['upload', 'camera'] as const).map(tab => (
                             <button
                                 key={tab}
                                 onClick={() => {
-                                    setActiveTab(tab as any);
-                                    tab === 'camera' ? startCamera() : stopCamera();
+                                    setActiveTab(tab);
+
+                                    if (tab === 'camera') {
+                                        startCamera();
+                                    } else {
+                                        stopCamera();
+                                    }
                                 }}
                                 className={`flex-1 py-2 rounded-lg text-sm font-medium transition
-                                    ${activeTab === tab
+        ${activeTab === tab
                                         ? 'bg-white shadow text-green-600'
                                         : 'text-gray-500 hover:text-gray-700'
                                     }`}
@@ -295,7 +315,6 @@ export function DeteksiPenyakit() {
                             </button>
                         ))}
                     </div>
-
                     {/* Content */}
                     {!uploadedImage && activeTab === 'upload' && (
                         <label className="group border-2 border-dashed border-green-300 rounded-2xl p-10 flex flex-col items-center cursor-pointer hover:bg-green-50/50 transition">
