@@ -8,6 +8,8 @@ import {
     Trash2
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+
 
 const STORAGE_KEY = "farmlens_chatbot";
 
@@ -126,6 +128,26 @@ export default function Chatbot() {
         inputRef.current?.focus();
     };
 
+    const QUICK_TEMPLATES = [
+        {
+            label: "🌿 Penyakit Tanaman",
+            text: "Daun tanaman saya menguning dan berbintik, apa penyebabnya dan bagaimana solusinya?",
+        },
+        {
+            label: "🐛 Hama",
+            text: "Tanaman saya sering dimakan ulat kecil, hama apa itu dan cara mengatasinya?",
+        },
+        {
+            label: "🧪 Pemupukan",
+            text: "Pupuk apa yang cocok untuk tanaman sayur agar tumbuh subur?",
+        },
+        {
+            label: "🏙️ Urban Farming",
+            text: "Bagaimana cara menanam sayur di lahan sempit atau pot di rumah?",
+        },
+    ];
+
+
     return (
         <div className="min-h-screen bg-linear-to-b from-green-50 to-white pt-28 pb-12">
             <div className="max-w-6xl mx-auto px-4">
@@ -153,7 +175,7 @@ export default function Chatbot() {
                             </div>
                             <div>
                                 <p className="text-sm text-gray-500">FarmLens Assistant</p>
-                                <p className="font-semibold">Online • Gemini 1.5</p>
+                                <p className="font-semibold">Online</p>
                             </div>
                         </div>
 
@@ -187,7 +209,23 @@ export default function Chatbot() {
                                                 : "bg-white"
                                                 }`}
                                         >
-                                            <div className="whitespace-pre-wrap">{m.content}</div>
+                                            <ReactMarkdown
+                                                components={{
+                                                    p: ({ children }) => (
+                                                        <p className="mb-2 last:mb-0">{children}</p>
+                                                    ),
+                                                    ul: ({ children }) => (
+                                                        <ul className="list-disc pl-5 space-y-1">{children}</ul>
+                                                    ),
+                                                    li: ({ children }) => <li>{children}</li>,
+                                                    strong: ({ children }) => (
+                                                        <strong className="font-semibold">{children}</strong>
+                                                    ),
+                                                }}
+                                            >
+                                                {m.content}
+                                            </ReactMarkdown>
+
                                             <div className="mt-1 text-[11px] opacity-60">
                                                 {formatTime(m.createdAt)}
                                             </div>
@@ -199,12 +237,24 @@ export default function Chatbot() {
                             {typing && (
                                 <div className="flex items-center gap-2 text-sm text-gray-500">
                                     <Loader2 className="w-4 h-4 animate-spin" />
-                                    Gemini sedang mengetik…
+                                    Farmlens Assisten sedang mengetik…
                                 </div>
                             )}
                         </div>
 
                         {/* INPUT */}
+                        <div className="mb-3 flex flex-wrap gap-2">
+                            {QUICK_TEMPLATES.map((q) => (
+                                <button
+                                    key={q.label}
+                                    onClick={() => sendMessage(q.text)}
+                                    disabled={typing}
+                                    className="text-xs px-3 py-2 rounded-full border bg-white hover:bg-green-50 text-green-700 transition disabled:opacity-50"
+                                >
+                                    {q.label}
+                                </button>
+                            ))}
+                        </div>
                         <div className="mt-4 flex gap-3">
                             <textarea
                                 ref={inputRef}
