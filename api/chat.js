@@ -1,19 +1,16 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
 
 export default async function handler(req, res) {
-  // CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS, GET");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Preflight
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
+  if (req.method === "OPTIONS") return res.status(200).end();
 
-  // GET (biar tidak 405)
   if (req.method === "GET") {
     return res.status(200).json({
       status: "ok",
@@ -26,14 +23,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    if (!process.env.GEMINI_API_KEY) {
-      throw new Error("GEMINI_API_KEY tidak ditemukan");
-    }
-
     const { messages } = req.body;
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-pro",
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash-preview", // ✅ GRATIS & SESUAI DOKUMEN
+      contents: messages.map((m) => ({
+        role: m.role === "user" ? "user" : "model",
+        parts: [{ text: m.content }],
+      })),
       systemInstruction: `
 Kamu adalah AI FarmLens 🌱
 Ahli urban farming, penyakit tanaman, pupuk, dan cuaca.
@@ -41,33 +38,11 @@ Jawab ringkas, praktis, dan ramah petani.
 `,
     });
 
-    const result = await model.generateContent({
-      contents: messages.map((m) => ({
-        role: m.role === "user" ? "user" : "model",
-        parts: [{ text: m.content }],
-      })),
-    });
-
     return res.json({
-      reply: result.response.text(),
+      reply: response.text,
     });
-
-    // const chat = model.startChat({
-    //   history: messages.map((m) => ({
-    //     role: m.role === "user" ? "user" : "model",
-    //     parts: [{ text: m.content }],
-    //   })),
-    // });
-
-    // const result = await chat.sendMessage(
-    //   messages[messages.length - 1].content
-    // );
-
-    // return res.json({
-    //   reply: result.response.text(),
-    // });
   } catch (err) {
-    console.error("CHAT API ERROR:", err?.response?.data || err);
+    console.error("CHAT API ERROR:", err);
     return res.status(500).json({
       error: err.message || "Gagal memproses AI",
     });
