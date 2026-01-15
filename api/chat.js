@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     const { messages } = req.body;
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-1.5-pro",
       systemInstruction: `
 Kamu adalah AI FarmLens 🌱
 Ahli urban farming, penyakit tanaman, pupuk, dan cuaca.
