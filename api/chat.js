@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     const { messages } = req.body;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview", // ✅ GRATIS & SESUAI DOKUMEN
+      model: "gemini-3-flash-preview",
       contents: messages.map((m) => ({
         role: m.role === "user" ? "user" : "model",
         parts: [{ text: m.content }],
@@ -38,10 +38,13 @@ Jawab ringkas, praktis, dan ramah petani.
 `,
     });
 
-    return res.json({
-      reply: response.text,
-    });
+    const reply =
+      response.candidates?.[0]?.content?.parts?.map((p) => p.text).join("") ||
+      "Maaf, aku belum bisa menjawab 🙏";
+
+    return res.json({ reply });
   } catch (err) {
+    console.log(JSON.stringify(response.candidates, null, 2));
     console.error("CHAT API ERROR:", err);
     return res.status(500).json({
       error: err.message || "Gagal memproses AI",
