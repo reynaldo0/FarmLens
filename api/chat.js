@@ -3,18 +3,22 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export default async function handler(req, res) {
-  // ===============================
-  // ✅ CORS HEADERS (WAJIB)
-  // ===============================
+  // CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS, GET");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // ===============================
-  // ✅ HANDLE PREFLIGHT
-  // ===============================
+  // Preflight
   if (req.method === "OPTIONS") {
     return res.status(200).end();
+  }
+
+  // GET (biar tidak 405)
+  if (req.method === "GET") {
+    return res.status(200).json({
+      status: "ok",
+      message: "FarmLens Chat API is running 🚀",
+    });
   }
 
   if (req.method !== "POST") {
@@ -22,24 +26,18 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("API KEY EXIST:", !!process.env.GEMINI_API_KEY);
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error("GEMINI_API_KEY tidak ditemukan");
+    }
 
     const { messages } = req.body;
 
-    if (!Array.isArray(messages)) {
-      return res.status(400).json({ error: "Invalid messages" });
-    }
-
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-pro",
+      model: "gemini-1.5-flash",
       systemInstruction: `
-Kamu adalah AI asisten FarmLens 🌱
-Fokus membantu:
-- Urban farming
-- Penyakit tanaman
-- Pemupukan
-- Hama & cuaca
-Jawab dengan bahasa Indonesia yang jelas, praktis, dan ramah petani.
+Kamu adalah AI FarmLens 🌱
+Ahli urban farming, penyakit tanaman, pupuk, dan cuaca.
+Jawab ringkas, praktis, dan ramah petani.
 `,
     });
 
@@ -54,11 +52,11 @@ Jawab dengan bahasa Indonesia yang jelas, praktis, dan ramah petani.
       messages[messages.length - 1].content
     );
 
-    return res.status(200).json({
+    return res.json({
       reply: result.response.text(),
     });
   } catch (err) {
-    console.error("Gemini error:", err);
+    console.error("CHAT API ERROR:", err);
     return res.status(500).json({
       error: "Gagal memproses AI",
     });
