@@ -16,6 +16,7 @@ import Marketplace from './pages/dashboard/Marketplace';
 import { PrediksiPanen } from './pages/dashboard/PrediksiPanen';
 import { RekomendasiAgronomi } from './pages/dashboard/RekomendasiAgronomi';
 import { WeatherRecommendationCard } from './pages/dashboard/Weather';
+import Journaling from './pages/dashboard/Journaling';
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -91,6 +92,14 @@ export default function DashboardLayout() {
                                 element={
                                     <DashboardPageTransition>
                                         <HamaPrediction />
+                                    </DashboardPageTransition>
+                                }
+                            />
+                            <Route
+                                path="journaling"
+                                element={
+                                    <DashboardPageTransition>
+                                        <Journaling />
                                     </DashboardPageTransition>
                                 }
                             />
