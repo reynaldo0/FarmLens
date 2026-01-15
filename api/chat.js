@@ -10,32 +10,24 @@ export default async function handler(req, res) {
   try {
     const { messages } = req.body;
 
-    if (!Array.isArray(messages) || messages.length === 0) {
-      return res.status(400).json({ error: "Messages is required" });
+    if (!Array.isArray(messages)) {
+      return res.status(400).json({ error: "Invalid messages" });
     }
 
-    // ================= GEMINI MODEL =================
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-pro",
       systemInstruction: `
-Kamu adalah FarmLens AI 🌱
-
-Tugas utama:
-- Membantu petani & urban farming
-- Diagnosa penyakit tanaman
-- Memberi solusi pemupukan
-- Analisis hama & cuaca
-
-Gaya jawaban:
-- Bahasa Indonesia
-- Ramah & praktis
-- Gunakan bullet point bila perlu
-- Fokus solusi lapangan
-- Jangan terlalu panjang kecuali diminta
+Kamu adalah AI asisten FarmLens 🌱
+Fokus membantu:
+- Urban farming
+- Penyakit tanaman
+- Pemupukan
+- Hama & cuaca
+Jawab dengan bahasa Indonesia yang jelas, praktis, dan ramah petani.
+Gunakan bullet point jika perlu.
 `,
     });
 
-    // ================= CHAT HISTORY =================
     const chat = model.startChat({
       history: messages.map((m) => ({
         role: m.role === "user" ? "user" : "model",
@@ -43,17 +35,17 @@ Gaya jawaban:
       })),
     });
 
-    // ================= SEND LAST MESSAGE =================
-    const lastMessage = messages[messages.length - 1].content;
-    const result = await chat.sendMessage(lastMessage);
+    const result = await chat.sendMessage(
+      messages[messages.length - 1].content
+    );
 
-    return res.json({
+    return res.status(200).json({
       reply: result.response.text(),
     });
   } catch (err) {
-    console.error("Gemini Error:", err);
+    console.error("Gemini error:", err);
     return res.status(500).json({
-      error: "Gagal memproses permintaan AI",
+      error: "Gagal memproses AI",
     });
   }
 }
