@@ -1,0 +1,50 @@
+export type ChatRole = "user" | "bot";
+
+export type ChatMessage = {
+  id: string;
+  role: ChatRole;
+  content: string;
+  createdAt: string;
+};
+
+export const CHATBOT_STORAGE_KEY = "farmlens_chatbot_v1";
+
+export const CHATBOT_SUGGESTIONS: { label: string; prompt: string }[] = [
+  {
+    label: "🌱 Cara mulai urban farming",
+    prompt: "Aku pemula, cara mulai urban farming dari nol gimana?",
+  },
+  {
+    label: "💧 Jadwal penyiraman",
+    prompt: "Jadwal penyiraman yang ideal untuk cabai di pot gimana?",
+  },
+  {
+    label: "🪴 Media tanam terbaik",
+    prompt: "Media tanam yang bagus untuk tomat biar subur apa?",
+  },
+  {
+    label: "🐛 Hama & solusi",
+    prompt: "Daun berlubang kecil-kecil, kemungkinan hama apa dan solusi?",
+  },
+  {
+    label: "🍃 Daun menguning",
+    prompt: "Daun menguning tapi batang masih segar, penyebabnya apa?",
+  },
+];
+
+export const CHATBOT_WELCOME: ChatMessage[] = [
+  {
+    id: "w1",
+    role: "bot",
+    content:
+      "Halo! Aku asisten FarmLens 🌿\nTanya apa aja seputar urban farming: perawatan, hama, pemupukan, sampai tips panen.",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "w2",
+    role: "bot",
+    content:
+      "Kamu bisa mulai dari quick prompt di bawah, atau langsung ketik pertanyaanmu 👇",
+    createdAt: new Date().toISOString(),
+  },
+];

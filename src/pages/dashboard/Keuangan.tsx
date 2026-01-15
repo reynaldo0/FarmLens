@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   Calculator,
   DollarSign,
@@ -22,7 +23,6 @@ import {
   XAxis,
   YAxis
 } from 'recharts';
-import { motion } from "framer-motion";
 
 
 const biayaProduksi = [

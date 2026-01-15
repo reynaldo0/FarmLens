@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
     AlertTriangle,
     Bug,
@@ -8,7 +9,6 @@ import {
     Sprout,
     Sun
 } from 'lucide-react';
-import { motion } from "framer-motion";
 
 const recommendations = [
     {

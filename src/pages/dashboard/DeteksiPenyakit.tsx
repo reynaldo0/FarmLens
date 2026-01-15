@@ -1,13 +1,12 @@
+import { motion } from "framer-motion";
 import {
     AlertCircle,
     Camera,
     CheckCircle2,
-    Info,
-    X,
-    Phone
+    Phone,
+    X
 } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from "framer-motion";
 
 
 /* ================= CONFIG ================= */

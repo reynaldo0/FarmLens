@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Community from './pages/Community';
+import Chatbot from './pages/ChatBot';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/kamus" element={<KamusTanaman />} />
           <Route path="/komunitas" element={<Community />} />
+          <Route path="/chatbot" element={<Chatbot />} />
         </Route>
 
         {/* DASHBOARD */}

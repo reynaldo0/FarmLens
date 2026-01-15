@@ -1,15 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
+    CloudLightning,
     CloudRain,
     CloudSun,
-    CloudLightning,
-    Sun,
-    Wind,
     Droplets,
-    ThermometerSun,
     Sparkles,
+    Sun,
+    ThermometerSun,
+    Wind,
 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
 /* ================= TYPES ================= */
 

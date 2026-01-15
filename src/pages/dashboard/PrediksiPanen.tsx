@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import {
-    AlertCircle,
     Calendar,
     CheckCircle2,
     DollarSign,
     Package,
-    TrendingUp,
+    TrendingUp
 } from "lucide-react";
 import {
     Bar,

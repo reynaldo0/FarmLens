@@ -1,17 +1,17 @@
+import { AnimatePresence, motion } from "framer-motion";
 import {
     Calendar,
     CheckCircle2,
     MapPin,
     Package,
-    Search,
-    Star,
-    TrendingUp,
     Phone,
-    ShoppingCart
+    Search,
+    ShoppingCart,
+    Star,
+    TrendingUp
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Toaster, toast } from 'sonner';
-import { motion, AnimatePresence } from "framer-motion";
 
 const listings = [
     {
