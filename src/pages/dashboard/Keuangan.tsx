@@ -75,7 +75,7 @@ export function Keuangan() {
 
       {/* Info Banner */}
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
-        <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+        <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
         <div>
           <p className="text-blue-900">Modul Keuangan MVP</p>
           <p className="text-sm text-blue-700 mt-1">
@@ -294,7 +294,7 @@ export function Keuangan() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-green-50 border border-green-200 rounded-xl p-5">
           <div className="flex items-start gap-3">
-            <TrendingUp className="w-6 h-6 text-green-600 flex-shrink-0" />
+            <TrendingUp className="w-6 h-6 text-green-600 shrink-0" />
             <div>
               <p className="text-green-900">Kinerja Positif</p>
               <p className="text-sm text-green-700 mt-1">
@@ -306,7 +306,7 @@ export function Keuangan() {
 
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
           <div className="flex items-start gap-3">
-            <PieChartIcon className="w-6 h-6 text-blue-600 flex-shrink-0" />
+            <PieChartIcon className="w-6 h-6 text-blue-600 shrink-0" />
             <div>
               <p className="text-blue-900">Optimalisasi Biaya</p>
               <p className="text-sm text-blue-700 mt-1">

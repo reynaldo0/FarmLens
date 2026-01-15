@@ -187,7 +187,7 @@ export function ManajemenLahan() {
                         <div className="space-y-3">
                             {selectedLahan.activities.map((activity, idx) => (
                                 <div key={idx} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
-                                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 shrink-0" />
                                     <div className="flex-1">
                                         <div className="flex items-start justify-between gap-2">
                                             <p className="text-gray-900">{activity.activity}</p>

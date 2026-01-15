@@ -7,6 +7,8 @@ import {
     Phone
 } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
+
 
 /* ================= CONFIG ================= */
 const USER_ID = 'FarmlensAcc';
@@ -244,15 +246,37 @@ export function DeteksiPenyakit() {
     return (
         <div className="space-y-8">
             {/* Header */}
-            <div>
-                <h2 className="text-2xl font-semibold">Deteksi Penyakit Tanaman</h2>
-                <p className="text-gray-500">Analisis AI berbasis foto tanaman</p>
-            </div>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-50 via-white to-green-100 border border-green-200 p-6"
+            >
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-300/30 rounded-full blur-3xl" />
+
+                <div className="relative">
+                    <p className="text-sm font-medium text-green-700">
+                        🌿 AI Plant Disease Detection
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-1">
+                        Deteksi Penyakit Tanaman
+                    </h2>
+                    <p className="text-gray-600 mt-2 max-w-xl">
+                        Unggah atau ambil foto tanaman Anda dan biarkan AI membantu
+                        mengidentifikasi penyakit serta rekomendasi penanganannya.
+                    </p>
+                </div>
+            </motion.div>
+
 
             {/* Main */}
             <div className="grid lg:grid-cols-2 gap-6">
                 {/* Upload Card */}
-                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 space-y-4">
+                <motion.div initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-white/80 backdrop-blur-xl rounded-2xl border border-gray-200 shadow-lg p-6 space-y-4"
+                >
                     {/* Tabs */}
                     <div className="flex bg-gray-100 rounded-xl p-1">
                         {['upload', 'camera'].map(tab => (
@@ -275,10 +299,12 @@ export function DeteksiPenyakit() {
 
                     {/* Content */}
                     {!uploadedImage && activeTab === 'upload' && (
-                        <label className="border-2 border-dashed rounded-2xl p-10 flex flex-col items-center cursor-pointer hover:bg-gray-50 transition">
-                            <Camera className="w-10 h-10 text-green-600 mb-2" />
-                            <p className="font-medium">Upload Foto</p>
-                            <p className="text-sm text-gray-500">JPG / PNG</p>
+                        <label className="group border-2 border-dashed border-green-300 rounded-2xl p-10 flex flex-col items-center cursor-pointer hover:bg-green-50/50 transition">
+                            <Camera className="w-12 h-12 text-green-600 mb-3 group-hover:scale-110 transition" />
+                            <p className="font-medium text-gray-900">Upload Foto Tanaman</p>
+                            <p className="text-sm text-gray-500">
+                                JPG / PNG • Resolusi jelas
+                            </p>
                             <input hidden type="file" accept="image/*" onChange={handleUpload} />
                         </label>
                     )}
@@ -308,15 +334,23 @@ export function DeteksiPenyakit() {
                     )}
 
                     {analyzing && (
-                        <div className="flex items-center gap-2 p-3 rounded-xl bg-blue-50 text-blue-700">
-                            <Info className="animate-pulse" />
-                            AI sedang menganalisis gambar...
-                        </div>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="flex items-center gap-3 p-4 rounded-xl bg-blue-50 border border-blue-200 text-blue-700"
+                        >
+                            <div className="w-3 h-3 bg-blue-500 rounded-full animate-ping" />
+                            <p className="font-medium">AI sedang menganalisis gambar...</p>
+                        </motion.div>
+
                     )}
-                </div>
+                </motion.div>
 
                 {/* Result */}
-                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+                <motion.div initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white/90 backdrop-blur rounded-2xl border border-gray-200 shadow-lg p-6"
+                >
                     {!result && !analyzing && (
                         <p className="text-center text-gray-400">
                             Hasil analisis akan muncul di sini
@@ -330,7 +364,7 @@ export function DeteksiPenyakit() {
                             onContact={contactPenyuluh}
                         />
                     )}
-                </div>
+                </motion.div>
             </div>
 
             {/* History */}
@@ -342,8 +376,9 @@ export function DeteksiPenyakit() {
                         <button
                             key={item.id}
                             onClick={() => setSelectedHistory(item)}
-                            className="rounded-xl border hover:shadow-md transition text-left overflow-hidden"
+                            className="roundedgroup rounded-xl border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-left overflow-hidden"
                         >
+                            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition" />
                             <img src={item.image} className="h-32 w-full object-cover" />
                             <div className="p-3">
                                 <p className="font-medium text-sm">{item.result.disease}</p>

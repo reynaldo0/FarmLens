@@ -41,7 +41,6 @@ export default function DashboardLayout() {
                 <main className="flex-1 p-4 sm:p-6 lg:p-8">
                     <AnimatePresence mode="wait">
                         <Routes location={location} key={location.pathname}>
-                            <Route index element={<Navigate to="overview" replace />} />
 
                             <Route
                                 path="overview"

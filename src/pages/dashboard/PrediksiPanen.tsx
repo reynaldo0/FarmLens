@@ -163,7 +163,7 @@ export function PrediksiPanen() {
                             </div>
 
                             <div className="flex items-center gap-4">
-                                <div className="flex-1">
+                                <div className="1">
                                     <div className="flex items-center justify-between text-sm mb-2">
                                         <span className="text-gray-600">Reliabilitas Prediksi</span>
                                         <span className="text-gray-900">{pred.reliabilitas}%</span>
@@ -258,7 +258,7 @@ export function PrediksiPanen() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
                         <div className="flex items-start gap-3">
-                            <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                             <div>
                                 <p className="text-green-900">Optimalisasi Lahan A & B</p>
                                 <p className="text-sm text-green-700 mt-1">
@@ -270,7 +270,7 @@ export function PrediksiPanen() {
 
                     <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
                         <div className="flex items-start gap-3">
-                            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                            <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                             <div>
                                 <p className="text-amber-900">Perhatian Khusus Lahan C</p>
                                 <p className="text-sm text-amber-700 mt-1">
@@ -282,7 +282,7 @@ export function PrediksiPanen() {
 
                     <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
                         <div className="flex items-start gap-3">
-                            <Calendar className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                            <Calendar className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                             <div>
                                 <p className="text-blue-900">Rencanakan Penjualan Awal</p>
                                 <p className="text-sm text-blue-700 mt-1">
@@ -294,7 +294,7 @@ export function PrediksiPanen() {
 
                     <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
                         <div className="flex items-start gap-3">
-                            <Package className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                            <Package className="w-5 h-5 text-purple-600 shrink-0 mt-0.5" />
                             <div>
                                 <p className="text-purple-900">Persiapan Pasca Panen</p>
                                 <p className="text-sm text-purple-700 mt-1">

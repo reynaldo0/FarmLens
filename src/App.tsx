@@ -7,6 +7,9 @@ import Beranda from './pages/Beranda';
 import Belajar from './pages/Belajar';
 import Blog from './pages/Blog';
 import KamusTanaman from './pages/Kamus';
+import ProtectedRoute from './components/ProtectedRoute';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 export default function App() {
   return (
@@ -23,7 +26,18 @@ export default function App() {
         </Route>
 
         {/* DASHBOARD */}
-        <Route path="/dashboard/*" element={<DashboardLayout />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route
+          path="/dashboard/*"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        />
+
 
       </Routes>
     </BrowserRouter>

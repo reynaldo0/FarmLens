@@ -154,7 +154,7 @@ export function RekomendasiAgronomi() {
                                     className={`border rounded-xl p-4 ${getPriorityColor(rec.priority)}`}
                                 >
                                     <div className="flex items-start gap-4">
-                                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${rec.priority === 'urgent' ? 'bg-red-200 text-red-700' :
+                                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${rec.priority === 'urgent' ? 'bg-red-200 text-red-700' :
                                                 rec.priority === 'high' ? 'bg-amber-200 text-amber-700' :
                                                     rec.priority === 'medium' ? 'bg-blue-200 text-blue-700' :
                                                         rec.priority === 'low' ? 'bg-green-200 text-green-700' :

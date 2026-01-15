@@ -10,6 +10,8 @@ import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YA
 
 import { useWeather } from '../../hooks/useWeather';
 import { useBmkgJakarta } from '../../hooks/useBmkgJakarta';
+import { motion } from "framer-motion";
+import { getAuth } from "../../utils/auth";
 import { DashboardOverviewSkeleton } from '../../components/DashboardSkeleton';
 
 const trendData = [
@@ -31,11 +33,63 @@ export function DashboardOverview() {
         return <DashboardOverviewSkeleton />;
     }
 
+    const user = getAuth();
+    const userName =
+        user?.name ?? user?.email?.split("@")[0] ?? "Petani";
+
     const hujanLebat = cuaca.hujan >= 20;
 
 
     return (
         <div className="space-y-6">
+            {/* Welcome Section */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative overflow-hidden rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 via-white to-green-100 p-6"
+            >
+                {/* Decorative blur */}
+                <div className="absolute -top-12 -right-12 w-40 h-40 bg-green-300/30 rounded-full blur-3xl" />
+
+                <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                        <p className="text-sm text-green-700 font-medium">
+                            👋 Selamat datang kembali
+                        </p>
+                        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-1">
+                            {userName}
+                        </h1>
+                        <p className="text-sm text-gray-600 mt-2 max-w-md">
+                            Hari ini cuaca{" "}
+                            <span className="font-medium">{weather.summary}</span>.
+                            Tetap pantau kondisi lahan untuk hasil panen optimal.
+                        </p>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                        <div className="bg-white rounded-xl border border-gray-200 px-4 py-3 text-center shadow-sm">
+                            <p className="text-xs text-gray-500">Suhu</p>
+                            <p className="text-lg font-semibold text-gray-900">
+                                {cuaca.suhu}°C
+                            </p>
+                        </div>
+                        <div className="bg-white rounded-xl border border-gray-200 px-4 py-3 text-center shadow-sm">
+                            <p className="text-xs text-gray-500">Hujan</p>
+                            <p className="text-lg font-semibold text-gray-900">
+                                {cuaca.hujan} mm
+                            </p>
+                        </div>
+                        <div className="bg-white rounded-xl border border-gray-200 px-4 py-3 text-center shadow-sm">
+                            <p className="text-xs text-gray-500">RH</p>
+                            <p className="text-lg font-semibold text-gray-900">
+                                {cuaca.kelembaban}%
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+
             {/* Header */}
             <div>
                 <h2 className="text-gray-900">Dashboard Utama</h2>
@@ -263,7 +317,7 @@ export function DashboardOverview() {
                     </div>
 
                     <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                        <Calendar className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <Calendar className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                         <div className="flex-1">
                             <p className="text-blue-900">Jadwal pemupukan Lahan A & B besok</p>
                             <p className="text-sm text-blue-700 mt-1">Siapkan pupuk NPK 15-15-15 sebanyak 50 kg</p>

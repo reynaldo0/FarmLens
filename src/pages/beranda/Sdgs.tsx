@@ -29,7 +29,7 @@ export default function SdgsSection() {
 
                         <div className="space-y-4">
                             <div className="flex items-start gap-3">
-                                <Target className="w-6 h-6 text-green-200 flex-shrink-0" />
+                                <Target className="w-6 h-6 text-green-200 shrink-0" />
                                 <div>
                                     <div className="font-semibold">Target 2.3</div>
                                     <div className="text-sm text-green-50">
@@ -39,7 +39,7 @@ export default function SdgsSection() {
                             </div>
 
                             <div className="flex items-start gap-3">
-                                <Sprout className="w-6 h-6 text-green-200 flex-shrink-0" />
+                                <Sprout className="w-6 h-6 text-green-200 shrink-0" />
                                 <div>
                                     <div className="font-semibold">Urban Farming</div>
                                     <div className="text-sm text-green-50">

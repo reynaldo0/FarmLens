@@ -256,7 +256,7 @@ export function AdminPanel() {
                 <div className="space-y-3">
                     {edukasiMateri.map((materi, idx) => (
                         <div key={idx} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                            <FileText className="w-8 h-8 text-blue-600 flex-shrink-0" />
+                            <FileText className="w-8 h-8 text-blue-600 shrink-0" />
                             <div className="flex-1">
                                 <p className="text-gray-900">{materi.judul}</p>
                                 <div className="flex items-center gap-4 text-sm text-gray-600 mt-1">
