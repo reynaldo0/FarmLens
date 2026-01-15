@@ -22,6 +22,8 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log("API KEY EXIST:", !!process.env.GEMINI_API_KEY);
+
     const { messages } = req.body;
 
     if (!Array.isArray(messages)) {
