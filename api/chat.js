@@ -41,24 +41,35 @@ Jawab ringkas, praktis, dan ramah petani.
 `,
     });
 
-    const chat = model.startChat({
-      history: messages.map((m) => ({
+    const result = await model.generateContent({
+      contents: messages.map((m) => ({
         role: m.role === "user" ? "user" : "model",
         parts: [{ text: m.content }],
       })),
     });
 
-    const result = await chat.sendMessage(
-      messages[messages.length - 1].content
-    );
-
     return res.json({
       reply: result.response.text(),
     });
+
+    // const chat = model.startChat({
+    //   history: messages.map((m) => ({
+    //     role: m.role === "user" ? "user" : "model",
+    //     parts: [{ text: m.content }],
+    //   })),
+    // });
+
+    // const result = await chat.sendMessage(
+    //   messages[messages.length - 1].content
+    // );
+
+    // return res.json({
+    //   reply: result.response.text(),
+    // });
   } catch (err) {
-    console.error("CHAT API ERROR:", err);
+    console.error("CHAT API ERROR:", err?.response?.data || err);
     return res.status(500).json({
-      error: "Gagal memproses AI",
+      error: err.message || "Gagal memproses AI",
     });
   }
 }
