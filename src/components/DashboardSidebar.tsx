@@ -23,7 +23,7 @@ const menuItems = [
     { path: "keuangan", label: "Keuangan", icon: Wallet, role: "petani" },
     { path: "weather", label: "Cuaca", icon: CloudSun, role: "petani" },
     { path: "marketplace", label: "Marketplace", icon: ShoppingCart, role: "all" },
-    { path: "admin", label: "Admin", icon: Shield, role: "petani" },
+    // { path: "admin", label: "Admin", icon: Shield, role: "petani" },
 ];
 
 type Props = {

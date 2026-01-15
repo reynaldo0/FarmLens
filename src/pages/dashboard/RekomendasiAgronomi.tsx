@@ -8,6 +8,7 @@ import {
     Sprout,
     Sun
 } from 'lucide-react';
+import { motion } from "framer-motion";
 
 const recommendations = [
     {
@@ -99,23 +100,44 @@ export function RekomendasiAgronomi() {
     return (
         <div className="space-y-6">
             {/* Header */}
-            <div>
-                <h2 className="text-gray-900">Rekomendasi Agronomi</h2>
-                <p className="text-gray-500 mt-1">
-                    Panduan tindakan berdasarkan kondisi lahan, cuaca, dan analisis AI
-                </p>
-            </div>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative overflow-hidden rounded-3xl border border-green-200
+             bg-gradient-to-br from-green-50 via-white to-green-100 p-6"
+            >
+                <div className="absolute -top-12 -right-12 w-40 h-40 bg-green-300/30 rounded-full blur-3xl" />
+
+                <div className="relative">
+                    <p className="text-sm font-medium text-green-700">
+                        🌱 Smart Agronomy Recommendation
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-1">
+                        Rekomendasi Agronomi
+                    </h2>
+                    <p className="text-gray-600 mt-2 max-w-xl">
+                        Panduan tindakan berbasis kondisi lahan, cuaca, dan analisis AI
+                        untuk hasil panen optimal.
+                    </p>
+                </div>
+            </motion.div>
+
 
             {/* Summary Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                <div className="bg-white rounded-xl border border-gray-200 p-4">
+                <motion.div whileHover={{ y: -4 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                    className="bg-white/80 backdrop-blur rounded-2xl border border-gray-200
+             p-4 shadow-sm"
+                >
                     <div className="flex items-center justify-between">
                         <p className="text-gray-600">Mendesak</p>
                         <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                             <span className="text-red-700">2</span>
                         </div>
                     </div>
-                </div>
+                </motion.div>
                 <div className="bg-white rounded-xl border border-gray-200 p-4">
                     <div className="flex items-center justify-between">
                         <p className="text-gray-600">Terjadwal</p>
@@ -149,16 +171,18 @@ export function RekomendasiAgronomi() {
                         <h3 className="text-gray-900 mb-4">Daftar Rekomendasi</h3>
                         <div className="space-y-3">
                             {recommendations.map((rec) => (
-                                <div
-                                    key={rec.id}
-                                    className={`border rounded-xl p-4 ${getPriorityColor(rec.priority)}`}
+                                <motion.div
+                                    whileHover={{ y: -3 }}
+                                    transition={{ type: "spring", stiffness: 250, damping: 22 }}
+                                    className={`border rounded-2xl p-4 ${getPriorityColor(rec.priority)}
+              shadow-sm hover:shadow-lg`}
                                 >
                                     <div className="flex items-start gap-4">
                                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${rec.priority === 'urgent' ? 'bg-red-200 text-red-700' :
-                                                rec.priority === 'high' ? 'bg-amber-200 text-amber-700' :
-                                                    rec.priority === 'medium' ? 'bg-blue-200 text-blue-700' :
-                                                        rec.priority === 'low' ? 'bg-green-200 text-green-700' :
-                                                            'bg-gray-200 text-gray-700'
+                                            rec.priority === 'high' ? 'bg-amber-200 text-amber-700' :
+                                                rec.priority === 'medium' ? 'bg-blue-200 text-blue-700' :
+                                                    rec.priority === 'low' ? 'bg-green-200 text-green-700' :
+                                                        'bg-gray-200 text-gray-700'
                                             }`}>
                                             {rec.icon}
                                         </div>
@@ -168,7 +192,9 @@ export function RekomendasiAgronomi() {
                                                     <p className="text-gray-900">{rec.title}</p>
                                                     <p className="text-sm text-gray-600">{rec.location}</p>
                                                 </div>
-                                                <span className={`px-2 py-1 rounded-full text-xs border whitespace-nowrap ${getPriorityBadge(rec.priority)}`}>
+                                                <span className={`px-3 py-1 rounded-full text-xs font-medium border
+  ${getPriorityBadge(rec.priority)}`}>
+
                                                     {rec.priority === 'urgent' ? 'Mendesak' :
                                                         rec.priority === 'high' ? 'Tinggi' :
                                                             rec.priority === 'medium' ? 'Sedang' :
@@ -191,7 +217,7 @@ export function RekomendasiAgronomi() {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
@@ -200,15 +226,19 @@ export function RekomendasiAgronomi() {
                 {/* Weather & Schedule */}
                 <div className="space-y-6">
                     {/* Weather Forecast */}
-                    <div className="bg-white rounded-xl border border-gray-200 p-6">
+                    <motion.div initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-white/80 backdrop-blur rounded-2xl border border-gray-200
+             p-6 shadow-sm"
+                    >
                         <h3 className="text-gray-900 mb-4">Prakiraan Cuaca 5 Hari</h3>
                         <div className="space-y-3">
                             {weatherSchedule.map((day, idx) => (
                                 <div
                                     key={idx}
                                     className={`p-3 rounded-lg border ${day.suitable
-                                            ? 'bg-green-50 border-green-200'
-                                            : 'bg-red-50 border-red-200'
+                                        ? 'bg-green-50 border-green-200'
+                                        : 'bg-red-50 border-red-200'
                                         }`}
                                 >
                                     <div className="flex items-center justify-between mb-2">
@@ -217,8 +247,8 @@ export function RekomendasiAgronomi() {
                                             <p className="text-xs text-gray-600">{day.date}</p>
                                         </div>
                                         <div className={`px-2 py-1 rounded-full text-xs ${day.suitable
-                                                ? 'bg-green-100 text-green-700'
-                                                : 'bg-red-100 text-red-700'
+                                            ? 'bg-green-100 text-green-700'
+                                            : 'bg-red-100 text-red-700'
                                             }`}>
                                             {day.suitable ? 'Cocok' : 'Tidak Cocok'}
                                         </div>
@@ -235,7 +265,7 @@ export function RekomendasiAgronomi() {
                             💡 Hindari penyemprotan pestisida saat hujan. Aplikasi pupuk cair
                             lebih efektif saat cuaca cerah.
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* Quick Actions */}
                     <div className="bg-white rounded-xl border border-gray-200 p-6">
@@ -262,7 +292,9 @@ export function RekomendasiAgronomi() {
             <div className="bg-white rounded-xl border border-gray-200 p-6">
                 <h3 className="text-gray-900 mb-4">Aktivitas Selesai (7 Hari Terakhir)</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="p-4 bg-gray-50/80 rounded-2xl border border-gray-200
+hover:shadow-md transition
+">
                         <div className="flex items-center gap-2 text-green-600 mb-2">
                             <CheckCircle2 className="w-5 h-5" />
                             <p className="text-gray-900">Pemupukan Dasar</p>

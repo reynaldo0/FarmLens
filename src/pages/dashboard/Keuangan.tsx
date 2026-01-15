@@ -1,27 +1,29 @@
 import {
-    Calculator,
-    DollarSign,
-    FileText,
-    Info,
-    PieChart as PieChartIcon,
-    TrendingDown,
-    TrendingUp
+  Calculator,
+  DollarSign,
+  FileText,
+  Info,
+  PieChart as PieChartIcon,
+  TrendingDown,
+  TrendingUp
 } from 'lucide-react';
 import {
-    Bar,
-    BarChart,
-    CartesianGrid,
-    Cell,
-    Legend,
-    Line,
-    LineChart,
-    Pie,
-    PieChart,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from 'recharts';
+import { motion } from "framer-motion";
+
 
 const biayaProduksi = [
   { kategori: 'Benih', biaya: 2500000, persentase: 12.5 },
@@ -66,62 +68,101 @@ export function Keuangan() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h2 className="text-gray-900">Manajemen Keuangan</h2>
-        <p className="text-gray-500 mt-1">
-          Transparansi biaya produksi dan proyeksi pendapatan
-        </p>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative overflow-hidden rounded-3xl
+             bg-gradient-to-br from-green-50 via-white to-green-100
+             border border-green-200 p-6"
+      >
+        <div className="absolute -top-12 -right-12 w-40 h-40 bg-green-300/30 rounded-full blur-3xl" />
+
+        <div className="relative">
+          <p className="text-sm font-medium text-green-700">
+            💰 Smart Finance Overview
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-1">
+            Manajemen Keuangan
+          </h2>
+          <p className="text-gray-600 mt-2 max-w-xl">
+            Transparansi biaya produksi, proyeksi pendapatan,
+            dan analisis profitabilitas pertanian.
+          </p>
+        </div>
+      </motion.div>
+
 
       {/* Info Banner */}
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-start gap-3">
+      <motion.div initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="bg-blue-50/80 backdrop-blur
+             border border-blue-200 rounded-2xl p-4 flex gap-3"
+      >
         <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
         <div>
           <p className="text-blue-900">Modul Keuangan MVP</p>
           <p className="text-sm text-blue-700 mt-1">
-            Fitur ini menyediakan transparansi biaya dan estimasi pendapatan untuk membantu perencanaan keuangan. 
+            Fitur ini menyediakan transparansi biaya dan estimasi pendapatan untuk membantu perencanaan keuangan.
             Belum termasuk layanan kredit atau pinjaman.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
+        <motion.div whileHover={{ y: -4 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          className="bg-white/80 backdrop-blur rounded-2xl
+             border border-gray-200 p-5 shadow-sm"
+        >
           <div className="flex items-center justify-between mb-3">
             <TrendingDown className="w-8 h-8 text-red-600" />
           </div>
           <p className="text-2xl text-gray-900">Rp {(totalBiaya / 1000000).toFixed(1)}jt</p>
           <p className="text-gray-600 mt-1">Total Biaya Produksi</p>
           <p className="text-xs text-gray-500 mt-1">Musim ini</p>
-        </div>
+        </motion.div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
+        <motion.div whileHover={{ y: -4 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          className="bg-white/80 backdrop-blur rounded-2xl
+             border border-gray-200 p-5 shadow-sm"
+        >
           <div className="flex items-center justify-between mb-3">
             <TrendingUp className="w-8 h-8 text-green-600" />
           </div>
           <p className="text-2xl text-gray-900">Rp {(totalPendapatan / 1000000).toFixed(1)}jt</p>
           <p className="text-gray-600 mt-1">Est. Pendapatan</p>
           <p className="text-xs text-green-600 mt-1">Proyeksi panen</p>
-        </div>
+        </motion.div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
+        <motion.div whileHover={{ y: -4 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          className="bg-white/80 backdrop-blur rounded-2xl
+             border border-gray-200 p-5 shadow-sm"
+        >
           <div className="flex items-center justify-between mb-3">
             <DollarSign className="w-8 h-8 text-blue-600" />
           </div>
           <p className="text-2xl text-gray-900">Rp {(totalProfit / 1000000).toFixed(1)}jt</p>
           <p className="text-gray-600 mt-1">Profit Bersih</p>
           <p className="text-xs text-blue-600 mt-1">+{((totalProfit / totalBiaya) * 100).toFixed(0)}% margin</p>
-        </div>
+        </motion.div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-5">
+        <motion.div whileHover={{ y: -4 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          className="bg-white/80 backdrop-blur rounded-2xl
+             border border-gray-200 p-5 shadow-sm"
+        >
           <div className="flex items-center justify-between mb-3">
             <Calculator className="w-8 h-8 text-purple-600" />
           </div>
           <p className="text-2xl text-gray-900">{avgRoi.toFixed(0)}%</p>
           <p className="text-gray-600 mt-1">ROI Rata-rata</p>
           <p className="text-xs text-gray-500 mt-1">Return on Investment</p>
-        </div>
+        </motion.div>
       </div>
 
       {/* Charts Row */}
@@ -153,8 +194,8 @@ export function Keuangan() {
             {biayaProduksi.map((item, idx) => (
               <div key={idx} className="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
                 <div className="flex items-center gap-2">
-                  <div 
-                    className="w-3 h-3 rounded-full" 
+                  <div
+                    className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: pieData[idx]?.color || '#gray' }}
                   />
                   <span className="text-sm text-gray-700">{item.kategori}</span>
@@ -176,9 +217,9 @@ export function Keuangan() {
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="lahan" tick={{ fontSize: 11 }} />
               <YAxis tick={{ fontSize: 11 }} />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'white', 
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'white',
                   border: '1px solid #e5e7eb',
                   borderRadius: '8px'
                 }}
@@ -222,13 +263,12 @@ export function Keuangan() {
                   </td>
                   <td className="py-3 px-4 text-right text-gray-900">{lahan.roi}%</td>
                   <td className="py-3 px-4 text-center">
-                    <span className={`px-2 py-1 rounded-full text-xs border ${
-                      lahan.roi >= 400 
-                        ? 'bg-green-100 text-green-700 border-green-200'
-                        : lahan.roi >= 300
+                    <span className={`px-2 py-1 rounded-full text-xs border ${lahan.roi >= 400
+                      ? 'bg-green-100 text-green-700 border-green-200'
+                      : lahan.roi >= 300
                         ? 'bg-blue-100 text-blue-700 border-blue-200'
                         : 'bg-amber-100 text-amber-700 border-amber-200'
-                    }`}>
+                      }`}>
                       {lahan.roi >= 400 ? 'Sangat Baik' : lahan.roi >= 300 ? 'Baik' : 'Sedang'}
                     </span>
                   </td>
@@ -261,27 +301,27 @@ export function Keuangan() {
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
             <XAxis dataKey="bulan" tick={{ fontSize: 12 }} />
             <YAxis tick={{ fontSize: 12 }} />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: 'white', 
+            <Tooltip
+              contentStyle={{
+                backgroundColor: 'white',
                 border: '1px solid #e5e7eb',
                 borderRadius: '8px'
               }}
               formatter={(value: any) => `Rp ${(value / 1000000).toFixed(1)}jt`}
             />
             <Legend />
-            <Line 
-              type="monotone" 
-              dataKey="pengeluaran" 
-              stroke="#ef4444" 
+            <Line
+              type="monotone"
+              dataKey="pengeluaran"
+              stroke="#ef4444"
               strokeWidth={2}
               name="Pengeluaran"
               dot={{ fill: '#ef4444', r: 4 }}
             />
-            <Line 
-              type="monotone" 
-              dataKey="pendapatan" 
-              stroke="#10b981" 
+            <Line
+              type="monotone"
+              dataKey="pendapatan"
+              stroke="#10b981"
               strokeWidth={2}
               name="Pendapatan"
               dot={{ fill: '#10b981', r: 4 }}

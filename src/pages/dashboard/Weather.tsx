@@ -170,92 +170,117 @@ export function WeatherRecommendationCard() {
     const Icon = conditionIcon(data.today.condition);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`relative rounded-3xl overflow-hidden bg-gradient-to-br  ${conditionGradient(
-                data.today.condition
-            )} ring-1 ring-black/5 shadow-2xl`}
-        >
-            {/* Glow */}
-            <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-white/40 blur-3xl" />
+        <>
+            {/* ===== PAGE HEADER ===== */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative overflow-hidden rounded-3xl border border-green-200
+             bg-gradient-to-br from-green-50 via-white to-green-100 p-6 mb-20"
+            >
 
-            <div className="relative p-8">
-                {/* HEADER */}
-                <div className="flex items-start justify-between">
-                    <div className="flex gap-4 items-center">
-                        <div className="w-14 h-14 rounded-2xl bg-white/80 backdrop-blur ring-1 ring-black/5 flex items-center justify-center shadow">
-                            <Icon className="w-7 h-7 text-neutral-800" />
+                <div className="relative">
+                    <p className="text-sm font-medium text-sky-700">
+                        🌦️ Smart Weather Intelligence
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-neutral-900 mt-1">
+                        Rekomendasi Cuaca & Perawatan
+                    </h2>
+                    <p className="text-neutral-600 mt-2 max-w-xl">
+                        Analisis cuaca harian berbasis BMKG dan rekomendasi tindakan
+                        untuk menjaga kesehatan tanaman secara optimal.
+                    </p>
+                </div>
+            </motion.div>
+
+            <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`relative rounded-3xl overflow-hidden bg-gradient-to-br  ${conditionGradient(
+                    data.today.condition
+                )} ring-1 ring-black/5 shadow-2xl`}
+            >
+                {/* Glow */}
+                <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-white/40 blur-3xl" />
+
+                <div className="relative p-8">
+                    {/* HEADER */}
+                    <div className="flex items-start justify-between">
+                        <div className="flex gap-4 items-center">
+                            <div className="w-14 h-14 rounded-2xl bg-white/80 backdrop-blur ring-1 ring-black/5 flex items-center justify-center shadow">
+                                <Icon className="w-7 h-7 text-neutral-800" />
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-semibold text-neutral-900">
+                                    Prediksi Cuaca
+                                </h3>
+                                <p className="text-sm text-neutral-500">
+                                    {data.locationLabel} • BMKG
+                                </p>
+                            </div>
                         </div>
+
+                        <span
+                            className={`px-4 py-1.5 rounded-full text-xs font-semibold ring-1 ${riskBadge(
+                                computed.risk.level
+                            )}`}
+                        >
+                            {computed.risk.level.toUpperCase()}
+                        </span>
+                    </div>
+
+                    {/* HERO */}
+                    <div className="mt-6 flex items-end justify-between">
                         <div>
-                            <h3 className="text-xl font-semibold text-neutral-900">
-                                Prediksi Cuaca
-                            </h3>
-                            <p className="text-sm text-neutral-500">
-                                {data.locationLabel} • BMKG
+                            <p className="text-sm text-neutral-500">Hari ini</p>
+                            <p className="text-5xl font-bold text-neutral-900">
+                                {data.today.tempC}°
+                            </p>
+                            <p className="mt-1 text-sm text-neutral-600">
+                                Hujan {data.today.rainMm} mm • RH {data.today.humidityPct}%
                             </p>
                         </div>
+                        <Sparkles className="w-8 h-8 text-amber-400" />
                     </div>
 
-                    <span
-                        className={`px-4 py-1.5 rounded-full text-xs font-semibold ring-1 ${riskBadge(
-                            computed.risk.level
-                        )}`}
-                    >
-                        {computed.risk.level.toUpperCase()}
-                    </span>
-                </div>
+                    {/* STATS */}
+                    <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <Stat label="Suhu" value={`${data.today.tempC}°C`} icon={<ThermometerSun />} />
+                        <Stat label="Kelembaban" value={`${data.today.humidityPct}%`} icon={<Droplets />} />
+                        <Stat label="Hujan" value={`${data.today.rainMm} mm`} icon={<CloudRain />} />
+                        <Stat label="Angin" value={`${data.today.windKmh} km/j`} icon={<Wind />} />
+                    </div>
 
-                {/* HERO */}
-                <div className="mt-6 flex items-end justify-between">
-                    <div>
-                        <p className="text-sm text-neutral-500">Hari ini</p>
-                        <p className="text-5xl font-bold text-neutral-900">
-                            {data.today.tempC}°
+                    {/* ADVICE */}
+                    <div className="mt-6 rounded-2xl bg-white/80 backdrop-blur ring-1 ring-black/5 p-5">
+                        <p className="font-semibold text-neutral-900">
+                            {computed.advice.emoji} {computed.advice.title}
                         </p>
                         <p className="mt-1 text-sm text-neutral-600">
-                            Hujan {data.today.rainMm} mm • RH {data.today.humidityPct}%
+                            {computed.advice.text}
                         </p>
                     </div>
-                    <Sparkles className="w-8 h-8 text-amber-400" />
-                </div>
 
-                {/* STATS */}
-                <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <Stat label="Suhu" value={`${data.today.tempC}°C`} icon={<ThermometerSun />} />
-                    <Stat label="Kelembaban" value={`${data.today.humidityPct}%`} icon={<Droplets />} />
-                    <Stat label="Hujan" value={`${data.today.rainMm} mm`} icon={<CloudRain />} />
-                    <Stat label="Angin" value={`${data.today.windKmh} km/j`} icon={<Wind />} />
-                </div>
-
-                {/* ADVICE */}
-                <div className="mt-6 rounded-2xl bg-white/80 backdrop-blur ring-1 ring-black/5 p-5">
-                    <p className="font-semibold text-neutral-900">
-                        {computed.advice.emoji} {computed.advice.title}
-                    </p>
-                    <p className="mt-1 text-sm text-neutral-600">
-                        {computed.advice.text}
-                    </p>
-                </div>
-
-                {/* WEEK */}
-                <div className="mt-6">
-                    <p className="text-sm font-semibold mb-3">7 Hari ke Depan</p>
-                    <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
-                        {data.next7Days.map((d) => (
-                            <div
-                                key={d.dateISO}
-                                className="rounded-xl p-3 bg-white/80 backdrop-blur ring-1 ring-black/5 text-center"
-                            >
-                                <p className="text-xs text-neutral-500">{d.dateISO.slice(5)}</p>
-                                <p className="font-semibold text-neutral-900">{d.tempC}°</p>
-                                <p className="text-xs text-neutral-500">{d.rainMm} mm</p>
-                            </div>
-                        ))}
+                    {/* WEEK */}
+                    <div className="mt-6">
+                        <p className="text-sm font-semibold mb-3">7 Hari ke Depan</p>
+                        <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
+                            {data.next7Days.map((d) => (
+                                <div
+                                    key={d.dateISO}
+                                    className="rounded-xl p-3 bg-white/80 backdrop-blur ring-1 ring-black/5 text-center"
+                                >
+                                    <p className="text-xs text-neutral-500">{d.dateISO.slice(5)}</p>
+                                    <p className="font-semibold text-neutral-900">{d.tempC}°</p>
+                                    <p className="text-xs text-neutral-500">{d.rainMm} mm</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </motion.div>
+            </motion.div>
+        </>
     );
 }
 

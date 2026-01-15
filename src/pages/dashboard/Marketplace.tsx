@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Toaster, toast } from 'sonner';
+import { motion, AnimatePresence } from "framer-motion";
 
 const listings = [
     {
@@ -142,45 +143,67 @@ export default function Marketplace() {
             <Toaster position="bottom-right" richColors />
 
             {/* HEADER */}
-            <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl font-semibold text-gray-900">
+            <motion.header
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative overflow-hidden rounded-3xl
+             bg-gradient-to-br from-green-50 via-white to-green-100
+             border border-green-200 p-6
+             flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+            >
+                <div className="absolute -top-12 -right-12 w-40 h-40 bg-green-300/30 rounded-full blur-3xl" />
+
+                <div className="relative">
+                    <p className="text-sm font-medium text-green-700">
+                        🛒 Smart Agriculture Marketplace
+                    </p>
+                    <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-1">
                         Marketplace Panen
                     </h1>
-                    <p className="text-gray-500">
-                        Pasokan pertanian terprediksi & terverifikasi
+                    <p className="text-gray-600 mt-2">
+                        Pasokan pertanian terprediksi, transparan, dan terverifikasi
                     </p>
                 </div>
 
-                <div className="flex gap-2">
+                {/* SEARCH & FILTER */}
+                <div className="relative z-10 flex gap-2">
                     <div className="relative">
                         <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                         <input
                             value={search}
                             onChange={e => setSearch(e.target.value)}
                             placeholder="Cari komoditas / lokasi"
-                            className="pl-9 pr-4 py-2 rounded-lg border focus:ring-2 focus:ring-green-500"
+                            className="pl-9 pr-4 py-2 rounded-xl border
+                   bg-white/80 backdrop-blur
+                   focus:ring-2 focus:ring-green-500"
                         />
                     </div>
 
                     <select
                         value={status}
                         onChange={e => setStatus(e.target.value)}
-                        className="px-3 py-2 rounded-lg border"
+                        className="px-3 py-2 rounded-xl border bg-white/80 backdrop-blur"
                     >
                         <option value="all">Semua</option>
                         <option value="available">Tersedia</option>
                         <option value="reserved">Dipesan</option>
                     </select>
                 </div>
-            </header>
+            </motion.header>
+
 
             {/* LISTINGS */}
             <section className="grid md:grid-cols-3 gap-6">
                 {filtered.map(item => (
-                    <article
+                    <motion.article
                         key={item.id}
-                        className="rounded-2xl border bg-white p-5 hover:shadow-xl transition"
+                        whileHover={{ y: -6 }}
+                        transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                        className="rounded-2xl bg-white/80 backdrop-blur
+             border border-gray-200 p-5
+             hover:shadow-2xl transition"
+
                     >
                         <div className="flex justify-between items-start">
                             <div>
@@ -192,7 +215,9 @@ export default function Marketplace() {
                                 </h3>
                                 <p className="text-sm text-gray-500">{item.petani}</p>
                             </div>
-                            <span className="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700">
+                            <span className="text-xs px-3 py-1 rounded-full font-medium
+                 bg-green-100 text-green-700 border border-green-200">
+
                                 Tersedia
                             </span>
                         </div>
@@ -214,7 +239,7 @@ export default function Marketplace() {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-2 text-sm text-blue-700 bg-blue-50 p-2 rounded-lg mt-4">
+                        <div className="flex items-center gap-2 text-sm text-blue-700 bg-blue-50 p-2 rounded-xl mt-4">
                             <MapPin className="w-4 h-4" /> {item.lokasi}
                         </div>
 
@@ -223,66 +248,86 @@ export default function Marketplace() {
                                 <span>Reliabilitas</span>
                                 <span>{item.reliabilitas}%</span>
                             </div>
-                            <div className="h-2 bg-gray-200 rounded-full">
-                                <div
+                            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <motion.div
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${item.reliabilitas}%` }}
+                                    transition={{ duration: 0.8, ease: "easeOut" }}
                                     className="h-2 bg-green-500 rounded-full"
-                                    style={{ width: `${item.reliabilitas}%` }}
                                 />
                             </div>
+
                         </div>
 
                         <div className="flex gap-2 mt-5">
                             <button
                                 onClick={handleContact}
-                                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg border hover:bg-gray-50"
+                                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl border hover:bg-gray-50"
                             >
                                 <Phone className="w-4 h-4" /> Hubungi
                             </button>
 
                             <button
                                 onClick={() => setDetail(item)}
-                                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700"
+                                className="flex-1 flex items-center justify-center gap-2
+             px-4 py-2 rounded-xl
+             bg-gradient-to-r from-green-600 to-green-500
+             text-white shadow-md hover:brightness-110 transition"
                             >
+
                                 <ShoppingCart className="w-4 h-4" /> Pesan
                             </button>
                         </div>
-                    </article>
+                    </motion.article>
                 ))}
             </section>
 
             {/* DETAIL + KONFIRMASI */}
-            {detail && (
-                <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-2xl p-6 w-full max-w-md">
-                        <h3 className="text-lg font-semibold mb-3">
-                            Konfirmasi Pesanan
-                        </h3>
+            <AnimatePresence>
+                {detail && (
+                    <motion.div initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/40
+                 flex items-end md:items-center justify-center z-50"
+                    >
+                        <motion.div
+                            initial={{ y: 100 }}
+                            animate={{ y: 0 }}
+                            exit={{ y: 100 }}
+                            transition={{ type: "spring", damping: 25 }}
+                            className="bg-white rounded-t-3xl md:rounded-3xl
+                   p-6 w-full max-w-md shadow-2xl">
+                            <h3 className="text-lg font-semibold mb-3">
+                                Konfirmasi Pesanan
+                            </h3>
 
-                        <div className="text-sm text-gray-600 mb-4 space-y-1">
-                            <p><strong>Komoditas:</strong> {detail.komoditas}</p>
-                            <p><strong>Petani:</strong> {detail.petani}</p>
-                            <p><strong>Volume:</strong> {detail.volume} ton</p>
-                            <p><strong>Harga:</strong> Rp {detail.harga.toLocaleString()} / kg</p>
-                            <p><strong>Panen:</strong> {new Date(detail.tanggalPanen).toLocaleDateString('id-ID')}</p>
-                        </div>
+                            <div className="text-sm text-gray-600 mb-4 space-y-1">
+                                <p><strong>Komoditas:</strong> {detail.komoditas}</p>
+                                <p><strong>Petani:</strong> {detail.petani}</p>
+                                <p><strong>Volume:</strong> {detail.volume} ton</p>
+                                <p><strong>Harga:</strong> Rp {detail.harga.toLocaleString()} / kg</p>
+                                <p><strong>Panen:</strong> {new Date(detail.tanggalPanen).toLocaleDateString('id-ID')}</p>
+                            </div>
 
-                        <div className="flex gap-2">
-                            <button
-                                onClick={() => setDetail(null)}
-                                className="flex-1 border rounded-lg py-2"
-                            >
-                                Batal
-                            </button>
-                            <button
-                                onClick={handleOrderSuccess}
-                                className="flex-1 bg-green-600 text-white rounded-lg py-2"
-                            >
-                                Konfirmasi
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={() => setDetail(null)}
+                                    className="flex-1 border rounded-xl py-2"
+                                >
+                                    Batal
+                                </button>
+                                <button
+                                    onClick={handleOrderSuccess}
+                                    className="flex-1 bg-green-600 text-white rounded-xl py-2"
+                                >
+                                    Konfirmasi
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

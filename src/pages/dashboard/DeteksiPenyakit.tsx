@@ -391,12 +391,20 @@ export function DeteksiPenyakit() {
 
             {/* Modal */}
             {selectedHistory && (
-                <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center ">
+                <motion.div initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-50 flex items-end md:items-center justify-center">
                     <div
                         onClick={() => setSelectedHistory(null)}
                         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
                     />
-                    <div className="relative bg-white w-full md:max-w-3xl rounded-t-2xl md:rounded-2xl max-h-[90vh] overflow-y-auto p-16">
+                    <motion.div initial={{ y: 100 }}
+                        animate={{ y: 0 }}
+                        exit={{ y: 100 }}
+                        transition={{ type: "spring", damping: 25 }}
+                        className="relative bg-white w-full md:max-w-3xl rounded-t-3xl md:rounded-3xl max-h-[90vh] overflow-y-auto p-8"
+                    >
                         <button
                             onClick={() => setSelectedHistory(null)}
                             className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
@@ -408,8 +416,8 @@ export function DeteksiPenyakit() {
                             result={selectedHistory.result}
                             onContact={contactPenyuluh}
                         />
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             )}
         </div>
     );
