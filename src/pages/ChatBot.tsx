@@ -161,7 +161,7 @@ export default function Chatbot() {
                         Chatbot Urban Farming
                     </h1>
                     <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
-                        AI berbasis Gemini 1.5 untuk membantu petani Indonesia 🌱
+                        berbasis AI untuk membantu petani Indonesia 🌱
                     </p>
                 </div>
 
@@ -255,7 +255,7 @@ export default function Chatbot() {
                                 </button>
                             ))}
                         </div>
-                        <div className="mt-4 flex gap-3">
+                    <div className="mt-4 flex gap-3">
                             <textarea
                                 ref={inputRef}
                                 value={text}
