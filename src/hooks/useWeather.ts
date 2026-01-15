@@ -3,6 +3,7 @@ import type { BmkgWeather, WeatherInsight } from "../types/weather";
 export function useWeather(cuaca: BmkgWeather | null): WeatherInsight {
   if (!cuaca) {
     return {
+      summary: "belum tersedia",
       risk: "aman",
       actionTitle: "Memuat cuaca",
       actionDescription: "Menunggu data cuaca dari BMKG",
@@ -11,6 +12,7 @@ export function useWeather(cuaca: BmkgWeather | null): WeatherInsight {
 
   if (cuaca.hujan >= 20) {
     return {
+      summary: "hujan lebat",
       risk: "bahaya",
       actionTitle: "Hujan Lebat Terdeteksi",
       actionDescription:
@@ -20,6 +22,7 @@ export function useWeather(cuaca: BmkgWeather | null): WeatherInsight {
 
   if (cuaca.suhu >= 32) {
     return {
+      summary: "cuaca panas",
       risk: "waspada",
       actionTitle: "Cuaca Panas",
       actionDescription:
@@ -28,6 +31,7 @@ export function useWeather(cuaca: BmkgWeather | null): WeatherInsight {
   }
 
   return {
+    summary: "cerah berawan",
     risk: "aman",
     actionTitle: "Cuaca Stabil",
     actionDescription: "Lanjutkan perawatan rutin dan pemantauan harian.",

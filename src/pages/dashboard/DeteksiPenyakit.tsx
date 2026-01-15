@@ -6,7 +6,7 @@ import {
     Phone,
     X
 } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 
 /* ================= CONFIG ================= */
@@ -29,7 +29,7 @@ type DetectionHistory = {
     id: string;
     image: string;
     date: string;
-    result: any;
+    result: DetectionResult;
 };
 
 /* ================= ANALYSIS RESULT ================= */
@@ -149,14 +149,17 @@ export function DeteksiPenyakit() {
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
     const [result, setResult] = useState<DetectionResult | null>(null);
     const [analyzing, setAnalyzing] = useState(false);
-    const [history, setHistory] = useState<DetectionHistory[]>([]);
+    const [history, setHistory] = useState<DetectionHistory[]>(() => {
+        const saved = localStorage.getItem(`detections_${USER_ID}`);
+        return saved ? (JSON.parse(saved) as DetectionHistory[]) : [];
+    });
     const [selectedHistory, setSelectedHistory] = useState<DetectionHistory | null>(null);
     const [activeTab, setActiveTab] = useState<'upload' | 'camera'>('upload');
 
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const streamRef = useRef<MediaStream | null>(null);
 
-    const mockResult = {
+    const mockResult: DetectionResult = {
         disease: 'Bercak Daun (Leaf Spot)',
         confidence: 87,
         severity: 'Sedang',
@@ -173,11 +176,6 @@ export function DeteksiPenyakit() {
             'Sanitasi lahan'
         ]
     };
-
-    useEffect(() => {
-        const saved = localStorage.getItem(`detections_${USER_ID}`);
-        if (saved) setHistory(JSON.parse(saved));
-    }, []);
 
     const saveHistory = (image: string, result: DetectionResult) => {
         const item = {
@@ -264,7 +262,7 @@ export function DeteksiPenyakit() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-50 via-white to-green-100 border border-green-200 p-6"
+                className="relative overflow-hidden rounded-2xl bg-linear-to-br from-green-50 via-white to-green-100 border border-green-200 p-6"
             >
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-300/30 rounded-full blur-3xl" />
 
