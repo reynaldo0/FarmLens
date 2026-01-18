@@ -883,7 +883,7 @@ export default function Marketplace() {
                                 <div className="col-span-full rounded-2xl border border-dashed p-6 text-center text-gray-600">
                                     Belum ada toko partner yang cocok untuk wilayah ini.
                                     <div className="text-xs text-gray-500 mt-1">
-                                        (Tambahkan data toko dengan province/regency/district/village code)
+                                        (Tambahkan data toko lengkap dengan kode wilayah: Provinsi, Kabupaten/Kota, Kecamatan, dan Kelurahan/Desa)
                                     </div>
                                 </div>
                             ) : (
