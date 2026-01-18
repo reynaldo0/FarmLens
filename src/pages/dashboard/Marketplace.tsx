@@ -353,40 +353,215 @@ const supplies: FarmingSupplyItem[] = [
 
 
 const partnerStores: PartnerStore[] = [
+    // ===== SUMATERA =====
     {
         id: "t1",
-        nama: "Toko Tani Sejahtera",
-        alamat: "Jl. Raya Pasar Tani No. 12",
-        telepon: "0812-0000-1111",
-        rating: 4.7,
-        provinceCode: "32",
+        nama: "Toko Tani Sejahtera Aceh",
+        alamat: "Jl. Teuku Umar No.12, Banda Aceh",
+        telepon: "0812-1111-0001",
+        rating: 4.8,
+        provinceCode: "11", // Aceh
     },
     {
         id: "t2",
-        nama: "Gudang Agro Makmur",
-        alamat: "Komplek Pergudangan Blok B-7",
-        telepon: "0813-0000-2222",
-        rating: 4.6,
-        provinceCode: "33",
+        nama: "Agro Store Medan",
+        alamat: "Jl. Gatot Subroto No.45, Medan",
+        telepon: "0812-1111-0002",
+        rating: 4.7,
+        provinceCode: "12", // Sumatera Utara
     },
     {
         id: "t3",
-        nama: "Sentra Pangan Nusantara",
-        alamat: "Jl. Distribusi Utama No. 5",
-        telepon: "0814-0000-3333",
-        rating: 4.8,
-        provinceCode: "35",
+        nama: "Tani Makmur Padang",
+        alamat: "Jl. Sudirman No.20, Padang",
+        telepon: "0812-1111-0003",
+        rating: 4.6,
+        provinceCode: "13", // Sumatera Barat
     },
     {
         id: "t4",
-        nama: "Kios Hasil Panen Jagakarsa",
-        alamat: "Jl. Kebun Raya No. 9, Jagakarsa",
-        telepon: "0815-0000-4444",
+        nama: "Sentra Agro Pekanbaru",
+        alamat: "Jl. HR Soebrantas No.88, Pekanbaru",
+        telepon: "0812-1111-0004",
+        rating: 4.7,
+        provinceCode: "14", // Riau
+    },
+    {
+        id: "t5",
+        nama: "Gudang Tani Palembang",
+        alamat: "Jl. Demang Lebar Daun No.15",
+        telepon: "0812-1111-0005",
+        rating: 4.6,
+        provinceCode: "16", // Sumatera Selatan
+    },
+    {
+        id: "t6",
+        nama: "Agro Bengkulu",
+        alamat: "Jl. Ahmad Yani No.10",
+        telepon: "0812-1111-0006",
+        rating: 4.5,
+        provinceCode: "17", // Bengkulu
+    },
+    {
+        id: "t7",
+        nama: "Lampung Agro Center",
+        alamat: "Jl. Raden Intan No.77, Bandar Lampung",
+        telepon: "0812-1111-0007",
+        rating: 4.6,
+        provinceCode: "18", // Lampung
+    },
+
+    // ===== JAWA =====
+    {
+        id: "t8",
+        nama: "Toko Tani Jakarta",
+        alamat: "Jl. Kebon Jeruk No.25, Jakarta",
+        telepon: "0812-1111-0008",
         rating: 4.9,
-        regencyCode: "31.74",
-        districtCode: "31.74.09",
+        provinceCode: "31", // DKI Jakarta
+    },
+    {
+        id: "t9",
+        nama: "Agro Bandung",
+        alamat: "Jl. Asia Afrika No.50, Bandung",
+        telepon: "0812-1111-0009",
+        rating: 4.8,
+        provinceCode: "32", // Jawa Barat
+    },
+    {
+        id: "t10",
+        nama: "Gudang Pangan Semarang",
+        alamat: "Jl. Pandanaran No.40",
+        telepon: "0812-1111-0010",
+        rating: 4.7,
+        provinceCode: "33", // Jawa Tengah
+    },
+    {
+        id: "t11",
+        nama: "Tani Jaya Yogyakarta",
+        alamat: "Jl. Malioboro No.60",
+        telepon: "0812-1111-0011",
+        rating: 4.8,
+        provinceCode: "34", // DI Yogyakarta
+    },
+    {
+        id: "t12",
+        nama: "Agro Surabaya",
+        alamat: "Jl. Darmo No.30",
+        telepon: "0812-1111-0012",
+        rating: 4.7,
+        provinceCode: "35", // Jawa Timur
+    },
+    {
+        id: "t13",
+        nama: "Kios Panen Jagakarsa",
+        alamat: "Jl. Kebun Raya No.9, Jagakarsa",
+        telepon: "0812-1111-0013",
+        rating: 4.9,
+        regencyCode: "31.74",      // Jakarta Selatan
+        districtCode: "31.74.09",  // Jagakarsa
+    },
+
+    // ===== KALIMANTAN =====
+    {
+        id: "t14",
+        nama: "Agro Pontianak",
+        alamat: "Jl. Gajah Mada No.12",
+        telepon: "0812-1111-0014",
+        rating: 4.6,
+        provinceCode: "61", // Kalimantan Barat
+    },
+    {
+        id: "t15",
+        nama: "Tani Makmur Banjarmasin",
+        alamat: "Jl. Ahmad Yani No.33",
+        telepon: "0812-1111-0015",
+        rating: 4.7,
+        provinceCode: "63", // Kalimantan Selatan
+    },
+    {
+        id: "t16",
+        nama: "Agro Samarinda",
+        alamat: "Jl. Mulawarman No.18",
+        telepon: "0812-1111-0016",
+        rating: 4.6,
+        provinceCode: "64", // Kalimantan Timur
+    },
+
+    // ===== SULAWESI =====
+    {
+        id: "t17",
+        nama: "Toko Tani Makassar",
+        alamat: "Jl. Pettarani No.90",
+        telepon: "0812-1111-0017",
+        rating: 4.8,
+        provinceCode: "73", // Sulawesi Selatan
+    },
+    {
+        id: "t18",
+        nama: "Agro Manado",
+        alamat: "Jl. Sam Ratulangi No.22",
+        telepon: "0812-1111-0018",
+        rating: 4.7,
+        provinceCode: "71", // Sulawesi Utara
+    },
+
+    // ===== BALI & NUSA TENGGARA =====
+    {
+        id: "t19",
+        nama: "Agro Bali",
+        alamat: "Jl. Teuku Umar No.14, Denpasar",
+        telepon: "0812-1111-0019",
+        rating: 4.9,
+        provinceCode: "51", // Bali
+    },
+    {
+        id: "t20",
+        nama: "Tani Lombok",
+        alamat: "Jl. Mataram No.17",
+        telepon: "0812-1111-0020",
+        rating: 4.6,
+        provinceCode: "52", // NTB
+    },
+    {
+        id: "t21",
+        nama: "Agro Kupang",
+        alamat: "Jl. El Tari No.5",
+        telepon: "0812-1111-0021",
+        rating: 4.5,
+        provinceCode: "53", // NTT
+    },
+
+    // ===== MALUKU =====
+    {
+        id: "t22",
+        nama: "Tani Ambon",
+        alamat: "Jl. Pattimura No.8",
+        telepon: "0812-1111-0022",
+        rating: 4.6,
+        provinceCode: "81", // Maluku
+    },
+
+    // ===== PAPUA =====
+    {
+        id: "t23",
+        nama: "Agro Jayapura",
+        alamat: "Jl. Raya Abepura No.10",
+        telepon: "0812-1111-0023",
+        rating: 4.7,
+        provinceCode: "91", // Papua
+    },
+    {
+        id: "t24",
+        nama: "Tani Merauke",
+        alamat: "Jl. Trans Papua No.3, Merauke",
+        telepon: "0812-1111-0024",
+        rating: 4.8,
+        provinceCode: "91",
+        regencyCode: "91.01", // Merauke
     },
 ];
+
 
 const WILAYAH_API = "https://farmlens-dev.vercel.app/api/wilayah";
 
@@ -799,6 +974,7 @@ export default function Marketplace() {
                     )}
                 </div>
             </motion.section>
+
             {/* REKOMENDASI TOKO */}
             <section className="rounded-3xl border border-gray-200 bg-white/70 backdrop-blur p-6 my-10">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -884,7 +1060,7 @@ export default function Marketplace() {
 
             {/* ===================== STEP 2+: BARU MUNCUL SETELAH WILAYAH DIPILIH ===================== */}
             {!hasSelectedWilayah ? null : (
-                <div ref={afterWilayahRef}>
+                <div>
                     {/* HEADER + SEARCH */}
                     <motion.header
                         initial={{ opacity: 0, y: 20 }}
@@ -893,7 +1069,7 @@ export default function Marketplace() {
                         className="relative overflow-hidden rounded-3xl
               bg-linear-to-br from-green-50 via-white to-green-100
               border border-green-200 p-6
-              flex flex-col gap-4"
+              flex flex-col gap-4 mb-10"
                     >
                         <div className="absolute -top-12 -right-12 w-40 h-40 bg-green-300/30 rounded-full blur-3xl" />
 
