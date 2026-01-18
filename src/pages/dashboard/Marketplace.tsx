@@ -1213,6 +1213,8 @@ export default function Marketplace() {
 
     const [search, setSearch] = useState("");
     const [status, setStatus] = useState<"all" | "available" | "reserved">("all");
+    const [showAllData, setShowAllData] = useState(false);
+
     const [detail, setDetail] = useState<MarketplaceItem | null>(null);
     const [detailSupply, setDetailSupply] = useState<FarmingSupplyItem | null>(null);
 
@@ -1238,7 +1240,7 @@ export default function Marketplace() {
     });
 
     // ✅ Gate: minimal pilih provinsi dulu
-    const hasSelectedWilayah = Boolean(provinceCode);
+    const hasSelectedWilayah = Boolean(provinceCode) || showAllData;
 
     // ✅ Auto-scroll setelah pilih provinsi (sekali)
     useEffect(() => {
@@ -1395,11 +1397,11 @@ export default function Marketplace() {
 
             // ✅ Filter provinsi berdasarkan lokasi text
             const inferredProv = inferProvinceCodeFromText(item.lokasi);
-            const matchProv = !provinceCode ? true : inferredProv === provinceCode;
+            const matchProv = showAllData ? true : !provinceCode ? true : inferredProv === provinceCode;
 
             return matchText && matchStatus && matchProv;
         });
-    }, [search, status, provinceCode]);
+    }, [search, status, provinceCode, showAllData]);
 
     const filteredAlat = useMemo(() => {
         return supplies.filter((item) => {
@@ -1415,11 +1417,11 @@ export default function Marketplace() {
 
             // ✅ Filter provinsi berdasarkan lokasi text
             const inferredProv = inferProvinceCodeFromText(item.lokasi);
-            const matchProv = !provinceCode ? true : inferredProv === provinceCode;
+            const matchProv = showAllData ? true : !provinceCode ? true : inferredProv === provinceCode;
 
             return matchText && matchStatus && matchProv;
         });
-    }, [search, status, provinceCode]);
+    }, [search, status, provinceCode, showAllData]);
 
     const handleContact = () => {
         toast.info("Fitur Dalam Pengembangan", {
@@ -1685,9 +1687,27 @@ export default function Marketplace() {
                             <div>
                                 <p className="text-sm font-medium text-green-700">🛒 Smart Agriculture Marketplace</p>
                                 <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-1">Marketplace</h1>
-                                <p className="text-gray-600 mt-2">
-                                    Data difilter berdasarkan provinsi terpilih: <b>{provinces.find(p => p.code === provinceCode)?.name ?? "—"}</b>
-                                </p>
+                                <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2">
+                                    <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+                                        <input
+                                            type="checkbox"
+                                            checked={showAllData}
+                                            onChange={(e) => setShowAllData(e.target.checked)}
+                                            className="w-4 h-4 accent-green-600"
+                                        />
+                                        Tampilkan semua data nasional (abaikan filter lokasi)
+                                    </label>
+
+                                    {showAllData ? (
+                                        <span className="text-xs text-green-700 bg-green-50 border border-green-200 px-2 py-1 rounded-lg">
+                                            Mode Nasional aktif
+                                        </span>
+                                    ) : (
+                                        <span className="text-xs text-gray-500">
+                                            (Aktifkan jika ingin lihat semua data tanpa pilih provinsi)
+                                        </span>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="relative z-10 flex flex-col sm:flex-row gap-2">
