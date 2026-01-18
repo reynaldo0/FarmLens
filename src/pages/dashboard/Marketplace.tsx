@@ -794,11 +794,93 @@ export default function Marketplace() {
                         </div>
                     ) : (
                         <div className="rounded-2xl bg-green-50 border border-green-200 p-4 text-sm text-green-800">
-                            ✅ Wilayah tersimpan. Konten rekomendasi & marketplace sudah muncul di bawah.
+                            Wilayah tersimpan. Konten rekomendasi & marketplace sudah muncul di bawah.
                         </div>
                     )}
                 </div>
             </motion.section>
+            {/* REKOMENDASI TOKO */}
+            <section className="rounded-3xl border border-gray-200 bg-white/70 backdrop-blur p-6 my-10">
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                    <div>
+                        <p className="text-sm font-medium text-green-700">Partner Terdekat</p>
+                        <h2 className="text-xl font-semibold text-gray-900 mt-1">Rekomendasi Toko di Sekitarmu</h2>
+                        <p className="text-gray-600 mt-2">
+                            Berdasarkan lokasi: <b>{wilayahLabel || "—"}</b>
+                        </p>
+                    </div>
+                </div>
+
+                <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {recommendedStores.length === 0 ? (
+                        <div className="col-span-full rounded-2xl border border-dashed p-6 text-center text-gray-600">
+                            Belum ada toko partner yang cocok untuk wilayah ini.
+                            <div className="text-xs text-gray-500 mt-1">
+                                (Tambahkan data toko lengkap dengan kode wilayah: Provinsi, Kabupaten/Kota, Kecamatan, dan Kelurahan/Desa)
+                            </div>
+                        </div>
+                    ) : (
+                        recommendedStores.map(({ store, score }) => (
+                            <motion.div
+                                key={store.id}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.35 }}
+                                className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm hover:shadow-lg transition"
+                            >
+                                <div className="flex items-start justify-between gap-3">
+                                    <div>
+                                        <div className="flex items-center gap-2">
+                                            <Store className="w-4 h-4 text-green-700" />
+                                            <h3 className="font-semibold text-gray-900">{store.nama}</h3>
+                                        </div>
+                                        <p className="text-sm text-gray-600 mt-1">{store.alamat}</p>
+                                    </div>
+
+                                    <div className="text-right">
+                                        <div className="inline-flex items-center gap-1 text-sm font-medium text-gray-900">
+                                            <Star className="w-4 h-4" /> {store.rating.toFixed(1)}
+                                        </div>
+                                        <div className="mt-1">
+                                            <span className="text-[11px] px-2 py-1 rounded-full border bg-gray-50 text-gray-700 border-gray-200">
+                                                {score >= 4
+                                                    ? "Satu desa"
+                                                    : score === 3
+                                                        ? "Satu kecamatan"
+                                                        : score === 2
+                                                            ? "Satu kab/kota"
+                                                            : "Satu provinsi"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4 flex gap-2">
+                                    <button
+                                        onClick={() => handleCallStore(store)}
+                                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl border hover:bg-gray-50"
+                                    >
+                                        <Phone className="w-4 h-4" /> Hubungi
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            toast.success("Permintaan penawaran dikirim", {
+                                                description:
+                                                    "Toko partner akan menghubungi Anda untuk detail harga, volume, dan jadwal pengiriman.",
+                                            })
+                                        }
+                                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl
+                          bg-linear-to-r from-green-600 to-green-500 text-white shadow-md hover:brightness-110 transition"
+                                    >
+                                        <ShoppingCart className="w-4 h-4" /> Minta Penawaran
+                                    </button>
+                                </div>
+                            </motion.div>
+                        ))
+                    )}
+                </div>
+            </section>
 
             {/* ===================== STEP 2+: BARU MUNCUL SETELAH WILAYAH DIPILIH ===================== */}
             {!hasSelectedWilayah ? null : (
@@ -866,88 +948,7 @@ export default function Marketplace() {
                         </div>
                     </motion.header>
 
-                    {/* REKOMENDASI TOKO */}
-                    <section className="rounded-3xl border border-gray-200 bg-white/70 backdrop-blur p-6 my-10">
-                        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-                            <div>
-                                <p className="text-sm font-medium text-green-700">Partner Terdekat</p>
-                                <h2 className="text-xl font-semibold text-gray-900 mt-1">Rekomendasi Toko di Sekitarmu</h2>
-                                <p className="text-gray-600 mt-2">
-                                    Berdasarkan lokasi: <b>{wilayahLabel || "—"}</b>
-                                </p>
-                            </div>
-                        </div>
 
-                        <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {recommendedStores.length === 0 ? (
-                                <div className="col-span-full rounded-2xl border border-dashed p-6 text-center text-gray-600">
-                                    Belum ada toko partner yang cocok untuk wilayah ini.
-                                    <div className="text-xs text-gray-500 mt-1">
-                                        (Tambahkan data toko lengkap dengan kode wilayah: Provinsi, Kabupaten/Kota, Kecamatan, dan Kelurahan/Desa)
-                                    </div>
-                                </div>
-                            ) : (
-                                recommendedStores.map(({ store, score }) => (
-                                    <motion.div
-                                        key={store.id}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.35 }}
-                                        className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm hover:shadow-lg transition"
-                                    >
-                                        <div className="flex items-start justify-between gap-3">
-                                            <div>
-                                                <div className="flex items-center gap-2">
-                                                    <Store className="w-4 h-4 text-green-700" />
-                                                    <h3 className="font-semibold text-gray-900">{store.nama}</h3>
-                                                </div>
-                                                <p className="text-sm text-gray-600 mt-1">{store.alamat}</p>
-                                            </div>
-
-                                            <div className="text-right">
-                                                <div className="inline-flex items-center gap-1 text-sm font-medium text-gray-900">
-                                                    <Star className="w-4 h-4" /> {store.rating.toFixed(1)}
-                                                </div>
-                                                <div className="mt-1">
-                                                    <span className="text-[11px] px-2 py-1 rounded-full border bg-gray-50 text-gray-700 border-gray-200">
-                                                        {score >= 4
-                                                            ? "Satu desa"
-                                                            : score === 3
-                                                                ? "Satu kecamatan"
-                                                                : score === 2
-                                                                    ? "Satu kab/kota"
-                                                                    : "Satu provinsi"}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-4 flex gap-2">
-                                            <button
-                                                onClick={() => handleCallStore(store)}
-                                                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl border hover:bg-gray-50"
-                                            >
-                                                <Phone className="w-4 h-4" /> Hubungi
-                                            </button>
-                                            <button
-                                                onClick={() =>
-                                                    toast.success("Permintaan penawaran dikirim", {
-                                                        description:
-                                                            "Toko partner akan menghubungi Anda untuk detail harga, volume, dan jadwal pengiriman.",
-                                                    })
-                                                }
-                                                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl
-                          bg-linear-to-r from-green-600 to-green-500 text-white shadow-md hover:brightness-110 transition"
-                                            >
-                                                <ShoppingCart className="w-4 h-4" /> Minta Penawaran
-                                            </button>
-                                        </div>
-                                    </motion.div>
-                                ))
-                            )}
-                        </div>
-                    </section>
 
                     {/* ===================== TAB CONTENT ===================== */}
                     {activeTab === "hasil" ? (
