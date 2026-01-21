@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
     return (
-        <footer className="bg-linear-to-b mt-24 from-green-50 to-white border-t border-green-100">
+        <footer className="bg-linear-to-b  from-green-50 to-white border-t border-green-100">
             <div className="max-w-7xl mx-auto px-6 py-16">
 
                 {/* TOP */}

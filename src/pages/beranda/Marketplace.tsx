@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { listings, partnerStores, supplies } from "../data/marketPlace";
+import { listings, partnerStores, supplies } from "../../data/marketPlace";
 
 
 type TabKey = "komoditas" | "perlengkapan" | "toko";
@@ -337,23 +337,6 @@ export default function MarketplaceShowcaseSection() {
 
                 </div>
 
-                {/* Bottom CTA strip */}
-                <div className="mt-10 bg-white/70 backdrop-blur rounded-3xl border border-green-100 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="space-y-1">
-                        <div className="text-lg font-bold text-gray-900">Mau lihat marketplace lebih detail?</div>
-                        <div className="text-sm text-gray-600">
-                            Buka marketplace lengkap untuk cari berdasarkan lokasi, status, kategori, dan rating.
-                        </div>
-                    </div>
-
-                    <Link
-                        to="/dashboard/marketplace"
-                        className="group bg-linear-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] inline-flex items-center gap-2"
-                    >
-                        Lihat Semua
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                </div>
             </div>
             {openQuote && (
                 <div
