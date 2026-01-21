@@ -9,7 +9,6 @@ import {
     Truck
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { listings, partnerStores, supplies } from "../../data/marketPlace";
 
 

@@ -1,5 +1,4 @@
 // src/components/sections/MarketplaceTipsSection.tsx
-import { Link } from "react-router-dom";
 import {
     ArrowRight,
     BadgeCheck,
@@ -9,10 +8,10 @@ import {
     Handshake,
     Leaf,
     MapPin,
-    Sparkles,
     Star,
-    Truck,
+    Truck
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function cx(...classes: Array<string | false | undefined | null>) {
     return classes.filter(Boolean).join(" ");
