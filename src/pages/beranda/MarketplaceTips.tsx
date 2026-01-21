@@ -204,7 +204,7 @@ export default function MarketplaceTipsSection() {
                         <div className="inline-flex items-center gap-2">
                             <Badge tone="green">
                                 <Leaf className="w-4 h-4" />
-                                SDGs 2: Zero Hunger
+                                SDGs 2<span className="hidden md:block">: Zero Hunger</span>
                             </Badge>
                             <Badge tone="gray">
                                 <MapPin className="w-4 h-4" />
