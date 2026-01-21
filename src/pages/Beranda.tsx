@@ -3,6 +3,7 @@ import HeroSection from "./beranda/Hero";
 import IssuesSection from "./beranda/Issue";
 import SdgsSection from "./beranda/Sdgs";
 import StepsSection from "./beranda/Steps";
+import MarketplaceShowcaseSection from "./Marketplace";
 
 export default function Beranda() {
     return (
@@ -11,6 +12,7 @@ export default function Beranda() {
             <IssuesSection />
             <StepsSection />
             <SdgsSection />
+            <MarketplaceShowcaseSection />
             <CtaSection />
         </div>
     );
