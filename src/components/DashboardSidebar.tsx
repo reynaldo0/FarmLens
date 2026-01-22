@@ -3,16 +3,15 @@ import {
     BookOpen,
     Bug,
     ClipboardList,
-    CloudSun,
     LayoutDashboard,
     Leaf,
     Map,
     Shield,
     ShoppingCart,
-    TrendingUp,
-    Wallet,
-    Store,
     Sparkles,
+    Store,
+    TrendingUp,
+    Wallet
 } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import type { UserRole } from "../types/auth"; // sesuaikan path

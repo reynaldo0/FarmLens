@@ -10,18 +10,18 @@ import { AdminPanel } from "./pages/dashboard/AdminPanel";
 import { DashboardOverview } from "./pages/dashboard/DashboardOverview";
 import { DeteksiPenyakit } from "./pages/dashboard/DeteksiPenyakit";
 import { HamaPrediction } from "./pages/dashboard/HamaPrediction";
+import Journaling from "./pages/dashboard/Journaling";
 import { Keuangan } from "./pages/dashboard/Keuangan";
 import { ManajemenLahan } from "./pages/dashboard/ManajemenLahan";
 import Marketplace from "./pages/dashboard/Marketplace";
 import { PrediksiPanen } from "./pages/dashboard/PrediksiPanen";
 import { RekomendasiAgronomi } from "./pages/dashboard/RekomendasiAgronomi";
 import { WeatherRecommendationCard } from "./pages/dashboard/Weather";
-import Journaling from "./pages/dashboard/Journaling";
 
-import { getAuth } from "./utils/auth"; // sesuaikan path kalau utils ada di src/utils/auth
 import RequireRole from "./components/RequiredRole";
 import MarketplaceOwnerPanel from "./pages/dashboard/marketplace/MarketplaceOwnerPanel";
 import MarketplaceOnBoarding from "./pages/dashboard/marketplace/MarletplaceOnBoarding";
+import { getAuth } from "./utils/auth"; // sesuaikan path kalau utils ada di src/utils/auth
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
