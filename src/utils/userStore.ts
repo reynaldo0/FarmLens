@@ -1,26 +1,42 @@
+
+import { dummyUsers } from "../data/dummyUsers";
 import type { AuthUser } from "../types/auth";
 
-const DB_KEY = "farmlens_users";
+const USERS_KEY = "farmlens_users_v1";
 
-// ambil semua user
-export function getUsers(): AuthUser[] {
-  const data = localStorage.getItem(DB_KEY);
-  return data ? (JSON.parse(data) as AuthUser[]) : [];
+function readUsers(): AuthUser[] {
+  const raw = localStorage.getItem(USERS_KEY);
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw) as AuthUser[];
+  } catch {
+    return [];
+  }
 }
 
-// simpan semua user
-function saveUsers(users: AuthUser[]) {
-  localStorage.setItem(DB_KEY, JSON.stringify(users));
+function writeUsers(users: AuthUser[]) {
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
-// tambah user baru
-export function addUser(user: AuthUser) {
-  const users = getUsers();
-  users.push(user);
-  saveUsers(users);
+export function ensureSeedUsers() {
+  const existing = readUsers();
+  if (existing.length > 0) return;
+  writeUsers(dummyUsers);
 }
 
-// cari user by email
+export function getAllUsers(): AuthUser[] {
+  ensureSeedUsers();
+  return readUsers();
+}
+
 export function findUserByEmail(email: string): AuthUser | undefined {
-  return getUsers().find((u) => u.email === email);
+  ensureSeedUsers();
+  return readUsers().find((u) => u.email.toLowerCase() === email.toLowerCase());
+}
+
+export function addUser(user: AuthUser) {
+  ensureSeedUsers();
+  const users = readUsers();
+  users.push(user);
+  writeUsers(users);
 }
