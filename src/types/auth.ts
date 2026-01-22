@@ -1,7 +1,9 @@
-export type UserRole = "petani" | "pembeli" | "admin";
+export type UserRole = "petani" | "pemilik_marketplace" | "admin";
 
 export interface AuthUser {
-  name?: string;
+  id: string;
+  name: string;
   email: string;
+  passwordHash: string;
   role: UserRole;
 }

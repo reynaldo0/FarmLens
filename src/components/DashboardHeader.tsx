@@ -9,18 +9,44 @@ interface Props {
     setSidebarOpen: (open: boolean) => void;
 }
 
-export default function DashboardHeader({
-    sidebarOpen,
-    setSidebarOpen,
-}: Props) {
+function roleLabel(role?: string) {
+    switch (role) {
+        case "petani":
+            return "Petani";
+        case "pemilik_marketplace":
+            return "Pemilik Marketplace";
+        case "pembeli":
+            return "Pembeli";
+        case "admin":
+            return "Admin";
+        default:
+            return "Akun";
+    }
+}
+
+function roleTone(role?: string) {
+    switch (role) {
+        case "admin":
+            return "bg-red-100 text-red-700 border-red-200";
+        case "pemilik_marketplace":
+            return "bg-blue-100 text-blue-700 border-blue-200";
+        case "petani":
+            return "bg-green-100 text-green-700 border-green-200";
+        case "pembeli":
+            return "bg-amber-100 text-amber-700 border-amber-200";
+        default:
+            return "bg-gray-100 text-gray-700 border-gray-200";
+    }
+}
+
+export default function DashboardHeader({ sidebarOpen, setSidebarOpen }: Props) {
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement | null>(null);
     const navigate = useNavigate();
 
     const user = getAuth();
 
-    const displayName =
-        user?.name ?? user?.email?.split("@")[0] ?? "Akun";
+    const displayName = user?.name ?? user?.email?.split("@")[0] ?? "Akun";
 
     const initials = displayName
         .split(" ")
@@ -77,12 +103,18 @@ export default function DashboardHeader({
                         className="flex items-center gap-3 rounded-xl px-2 py-1.5 hover:bg-gray-100 transition"
                     >
                         <div className="hidden sm:block text-right leading-tight">
-                            <p className="text-sm font-medium text-gray-900">
-                                {displayName}
-                            </p>
-                            {user?.email && (
-                                <p className="text-xs text-gray-500">{user.email}</p>
-                            )}
+                            <p className="text-sm font-medium text-gray-900">{displayName}</p>
+
+                            {/* ✅ Role badge under name */}
+                            <div className="mt-1 flex justify-end">
+                                <span
+                                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border ${roleTone(
+                                        user?.role
+                                    )}`}
+                                >
+                                    {roleLabel(user?.role)}
+                                </span>
+                            </div>
                         </div>
 
                         <div className="relative">
@@ -93,8 +125,7 @@ export default function DashboardHeader({
                         </div>
 
                         <ChevronDown
-                            className={`w-4 h-4 transition ${open ? "rotate-180" : ""
-                                }`}
+                            className={`w-4 h-4 transition ${open ? "rotate-180" : ""}`}
                         />
                     </button>
 
@@ -112,11 +143,21 @@ export default function DashboardHeader({
                                     <p className="text-sm font-semibold text-gray-900">
                                         {displayName}
                                     </p>
-                                    {user?.email && (
-                                        <p className="text-xs text-gray-500 truncate">
-                                            {user.email}
-                                        </p>
-                                    )}
+
+                                    {/* ✅ Role + email */}
+                                    <div className="mt-1 flex items-center justify-between gap-2">
+                                        <span
+                                            className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border ${roleTone(
+                                                user?.role
+                                            )}`}
+                                        >
+                                            {roleLabel(user?.role)}
+                                        </span>
+
+                                        {user?.email && (
+                                            <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <button
