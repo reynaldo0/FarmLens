@@ -71,7 +71,7 @@ export default function HeroSection() {
                             </div>
                         </div>
                     </div>
-                    <div className="hidden md:relative h-125">
+                    <div className="relative h-125">
                         <div className="absolute -inset-4 bg-linear-to-r from-green-400 to-emerald-400 rounded-3xl blur-2xl opacity-20"></div>
 
                         <div className="relative w-full h-full rounded-3xl overflow-hidden">
