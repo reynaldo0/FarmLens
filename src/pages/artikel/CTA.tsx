@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function CommunityCTA() {
     return (
-        <div className="mt-16 bg-linear-to-br from-emerald-600 to-green-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+        <div className="mt-16 bg-linear-to-br from-emerald-600 to-green-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden mb-20">
 
             {/* Decorative Orbs */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2 blur-2xl" />
