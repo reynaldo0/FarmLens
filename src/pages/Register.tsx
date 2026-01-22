@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Leaf, Store } from "lucide-react";
+import { ArrowLeft, Leaf, Store } from "lucide-react";
 import type { FormEvent } from "react";
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -132,17 +132,37 @@ export default function Register() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
-                        className="text-center mb-6"
+                        className="mb-6"
                     >
-                        <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
-                            ✨ Buat Akun FarmLens
+                        {/* top row: back + logo */}
+                        <div className="flex items-center justify-between mb-4">
+                            <Link
+                                to="/"
+                                className="inline-flex items-center gap-1 text-sm font-semibold text-green-700 hover:underline"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                                Kembali
+                            </Link>
+
+                            <Link to="/" className="inline-flex items-center gap-2">
+                                <img src="/logo.png" alt="Farmlens" className="w-10 h-10" />
+                                <span className="font-bold text-green-700 text-lg">FarmLens</span>
+                            </Link>
                         </div>
 
-                        <h2 className="text-3xl font-semibold tracking-tight text-gray-900 mt-4">
-                            {roleCopy.title}
-                        </h2>
-                        <p className="text-sm text-gray-500 mt-1">{roleCopy.subtitle}</p>
+                        {/* badge + title */}
+                        <div className="text-center">
+                            <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
+                                Buat Akun FarmLens
+                            </div>
+
+                            <h2 className="text-3xl font-semibold tracking-tight text-gray-900 mt-4">
+                                {roleCopy.title}
+                            </h2>
+                            <p className="text-sm text-gray-500 mt-1">{roleCopy.subtitle}</p>
+                        </div>
                     </motion.div>
+
 
                     {/* Role Switch */}
                     <motion.div
@@ -289,7 +309,7 @@ export default function Register() {
                             type="submit"
                             className="w-full h-12 rounded-2xl bg-linear-to-r from-green-600 to-green-700 text-white font-semibold shadow-lg shadow-green-500/25 hover:brightness-110 inline-flex items-center justify-center gap-2"
                         >
-                            Create Account
+                            Buat Akun
                             <span className="opacity-90">→</span>
                         </motion.button>
                     </form>
@@ -303,7 +323,7 @@ export default function Register() {
                     >
                         Sudah punya akun?{" "}
                         <Link to="/login" className="font-semibold text-green-700 hover:underline">
-                            Login
+                            Masuk
                         </Link>
                     </motion.p>
                 </motion.div>

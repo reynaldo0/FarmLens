@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Leaf, Store } from "lucide-react";
+import { ArrowLeft, Leaf, Store } from "lucide-react";
 import type { FormEvent } from "react";
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -133,14 +133,36 @@ export default function Login() {
             transition={{ delay: 0.2 }}
             className="text-center mb-6"
           >
-            <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
-              🌱 FarmLens Access
+            {/* Back Button */}
+            <div className="flex justify-between items-center mb-4">
+              <Link
+                to="/"
+                className="inline-flex items-center gap-1 text-sm font-semibold text-green-700 hover:underline"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Kembali
+              </Link>
+
+              {/* Logo */}
+              <Link to="/" className="inline-flex items-center gap-2">
+                <img src="/logo.png" alt="FarmLens" className="w-10 h-10" />
+                <span className="font-bold text-green-700 text-lg">FarmLens</span>
+              </Link>
             </div>
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
+              Akses Akun FarmLens
+            </div>
+
             <h2 className="text-3xl font-semibold tracking-tight text-gray-900 mt-4">
               {roleCopy.title}
             </h2>
-            <p className="text-sm text-gray-500 mt-1">{roleCopy.subtitle}</p>
+            <p className="text-sm text-gray-500 mt-1">
+              {roleCopy.subtitle}
+            </p>
           </motion.div>
+
 
           {/* Role Switch */}
           <motion.div
