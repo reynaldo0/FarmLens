@@ -14,14 +14,15 @@ import {
     Wallet
 } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
-import type { UserRole } from "../types/auth"; // sesuaikan path
+import type { UserRole } from "../types/auth"; 
+import type { LucideIcon } from "lucide-react";
 
 type MenuRole = UserRole | "all";
 
 const menuItems: Array<{
     path: string;
     label: string;
-    icon: React.ElementType;
+    icon: LucideIcon;
     roles: MenuRole[];
 }> = [
         // umum (yang login)
