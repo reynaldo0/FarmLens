@@ -58,7 +58,6 @@ export default function Footer() {
                         title="Tim FarmLens"
                         links={[
                             { label: 'Reynaldo Yusellino', to: '#' },
-                            { label: 'Alya Irhamni Malawat', to: '#' },
                             { label: 'Muhammad Sakha Ar-Rafi', to: '#' },
                             { label: 'Zhafirah Naswa Naufariza', to: '#' },
                             { label: 'Siti Aisyah', to: '#' },
