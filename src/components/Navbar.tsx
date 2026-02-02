@@ -1,6 +1,6 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import { LayoutDashboard, Menu as MenuIcon, X } from 'lucide-react'
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 type PagePath = '/' | '/belajar' | '/artikel' | '/komunitas' | '/blog' | '/kamus'
@@ -20,7 +20,6 @@ export function Navbar() {
         { label: 'Kamus', href: '/kamus' },
         { label: 'Artikel', href: '/artikel' },
         { label: 'Komunitas', href: '/komunitas' },
-        { label: 'Blog', href: '/blog' },
     ]
 
     useEffect(() => {

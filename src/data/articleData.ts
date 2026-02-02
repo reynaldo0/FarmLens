@@ -1,93 +1,159 @@
-export interface Article {
-  id: number;
+// src/data/articleData.ts
+export type ArticleCategory =
+  | "agroindustri"
+  | "ekonomi"
+  | "tips"
+  | "smartfarming"
+  | "iot"
+  | "pertanian_5_0"
+  | "kebijakan"
+  | "ketahanan_pangan";
+
+export type Article = {
+  id: string;
   title: string;
   excerpt: string;
-  category: string;
-  author: string;
-  date: string;
-  readTime: string;
-  image: string;
+  category: ArticleCategory;
   featured?: boolean;
-}
 
-export const categories = [
+  sourceUrl: string;
+  sourceName: string;
+
+  publishedAt?: string;
+  readTime?: number;
+};
+
+// ✅ CategoryFilter kamu butuh string[]
+export const categories: string[] = [
   "all",
-  "Ketahanan Pangan",
-  "Urban Farming",
-  "Perubahan Iklim",
+  "agroindustri",
+  "ekonomi",
+  "tips",
+  "smartfarming",
+  "iot",
+  "pertanian_5_0",
+  "kebijakan",
+  "ketahanan_pangan",
 ];
 
 export const articles: Article[] = [
   {
-    id: 1,
-    title: "Krisis Pangan Global 2026: Mengapa Urban Farming Menjadi Solusi",
-    excerpt:
-      "Perubahan iklim dan pertumbuhan populasi memaksa kita berinovasi...",
-    category: "Ketahanan Pangan",
-    author: "Dr. Siti Rahma",
-    date: "8 Januari 2026",
-    readTime: "8 menit",
-    image: "https://images.unsplash.com/photo-1762098069270-66f50cdb1a84",
+    id: "a1",
     featured: true,
+    title:
+      "Agroindustri: Jembatan yang Mengubah Hasil Tani Jadi Produk Bernilai Ekonomi",
+    excerpt:
+      "Inovasi agroindustri mendorong nilai tambah di pedesaan: dari panen mentah menjadi produk olahan bernilai ekonomi dan memperpanjang rantai produksi yang menguntungkan.",
+    category: "agroindustri",
+    sourceName: "Good News From Indonesia",
+    sourceUrl:
+      "https://www.goodnewsfromindonesia.id/2025/10/08/dari-hasil-panen-menjadi-produk-bernilai-bagaimana-peran-agroindustri-dalam-menggerakkan-pertanian-indonesia",
+    publishedAt: "2025-10-08",
+    readTime: 6,
   },
   {
-    id: 2,
-    title: "Urban Farming di Jakarta: Transformasi Lahan Sempit Jadi Produktif",
+    id: "a2",
+    title: "Mengapa Pertanian Jadi Pilar Utama Pembangunan Ekonomi Indonesia",
     excerpt:
-      "Studi kasus bagaimana warga Jakarta mengubah balkon dan rooftop menjadi kebun produktif yang menghasilkan 20kg sayuran per bulan.",
-    category: "Urban Farming",
-    author: "Ahmad Hidayat",
-    date: "5 Januari 2026",
-    readTime: "10 menit",
-    image:
-      "https://images.unsplash.com/photo-1630830921563-75b9b28e2154?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2ZXJ0aWNhbCUyMGdhcmRlbiUyMGNpdHl8ZW58MXx8fHwxNzY3OTcwNTg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "Pertanian menopang ketahanan pangan, penyerapan tenaga kerja pedesaan, ekspor komoditas unggulan, serta membuka peluang nilai tambah lewat pengolahan produk.",
+    category: "ekonomi",
+    sourceName: "Tambah Pinter",
+    sourceUrl:
+      "https://tambahpinter.com/mengapa-sektor-pertanian-penting-bagi-pembangunan-ekonomi-indonesia/",
+    readTime: 5,
   },
   {
-    id: 3,
-    title: "Dampak Perubahan Iklim terhadap Pertanian Indonesia",
+    id: "a3",
+    title: "6 Tips Sukses Bertani & Bercocok Tanam di Indonesia",
     excerpt:
-      "Analisis mendalam tentang bagaimana kenaikan suhu dan perubahan pola hujan mempengaruhi produktivitas tanaman lokal dan strategi adaptasi.",
-    category: "Perubahan Iklim",
-    author: "Prof. Budi Santoso",
-    date: "3 Januari 2026",
-    readTime: "12 menit",
-    image:
-      "https://images.unsplash.com/photo-1558906307-1a1c52b5ac8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGltYXRlJTIwY2hhbmdlJTIwYWdyaWN1bHR1cmV8ZW58MXx8fHwxNzY3OTcwNDQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "Strategi agar panen maksimal dan risiko gagal menurun: belajar dulu ilmunya, bibit unggul, pemupukan tepat, dan tanam sesuai musim.",
+    category: "tips",
+    sourceName: "IlmuBudidaya.com",
+    sourceUrl:
+      "https://ilmubudidaya.com/tips-sukses-bertani-dan-bercocok-tanam-di-indonesia",
+    readTime: 4,
   },
   {
-    id: 4,
-    title: "SDGs 2.3: Target Ketahanan Pangan dan Peran Petani Kecil",
+    id: "a4",
+    title:
+      "Tips Bertani untuk Pemula: Kiat Dasar agar Sukses di Dunia Pertanian",
     excerpt:
-      "Bagaimana target SDGs 2.3 mendorong peningkatan produktivitas dan pendapatan petani skala kecil melalui teknologi dan edukasi.",
-    category: "Ketahanan Pangan",
-    author: "Dr. Linda Wijaya",
-    date: "1 Januari 2026",
-    readTime: "7 menit",
-    image:
-      "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcmdhbmljJTIwZmFybWluZ3xlbnwxfHx8fDE3Njc5NDQ0Njh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "Panduan langkah awal bertani: persiapan lahan, pemilihan bibit, hingga perawatan yang praktis agar hasil panen lebih optimal.",
+    category: "tips",
+    sourceName: "KlikPertanian.id",
+    sourceUrl:
+      "https://www.klikpertanian.id/berita/112515465319/ternyata-ini-beberapa-tips-bertani-petani-pemula-wajib-tau?page=2",
+    readTime: 5,
   },
   {
-    id: 5,
-    title: "Sistem Hidroponik Modern: Solusi Pertanian Masa Depan",
+    id: "a5",
+    title:
+      "Pertanian Klasik vs Smartfarming: Pilihan Masa Depan di Pedesaan Indonesia",
     excerpt:
-      "Mengenal sistem hidroponik yang hemat air 90% dibanding pertanian konvensional dan cocok untuk lahan urban yang terbatas.",
-    category: "Urban Farming",
-    author: "Rina Kusuma",
-    date: "28 Desember 2025",
-    readTime: "9 menit",
-    image:
-      "https://images.unsplash.com/photo-1714560560652-e923cb9e30c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoeWRyb3BvbmljJTIwdmVnZXRhYmxlc3xlbnwxfHx8fDE3Njc5NzA1ODV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "Membandingkan praktik tradisional turun-temurun dengan pertanian cerdas berbasis teknologi digital—serta dampaknya pada produktivitas dan efisiensi.",
+    category: "smartfarming",
+    sourceName: "Kompasiana",
+    sourceUrl:
+      "https://www.kompasiana.com/mutmainnahinnah0285/696da850ed641565cc1130f2/pertanian-klasik-atau-smartfarming-di-pedesaan",
+    readTime: 6,
   },
   {
-    id: 6,
-    title: "Kekeringan dan Banjir: Dua Sisi Krisis Iklim di Sektor Pertanian",
+    id: "a6",
+    title:
+      "IoT & Smart Farming: Teknologi Masa Depan yang Mengubah Pertanian Modern",
     excerpt:
-      "Fenomena cuaca ekstrem mengancam ketahanan pangan nasional. Bagaimana petani beradaptasi dengan kondisi yang tidak menentu?",
-    category: "Perubahan Iklim",
-    author: "Dr. Bambang Irawan",
-    date: "25 Desember 2025",
-    readTime: "11 menit",
-    image:
-      "https://images.unsplash.com/photo-1703932892707-96a68172d8ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3Njc5NzA0NDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "IoT menghubungkan sensor dan data real-time untuk otomatisasi dan efisiensi, membantu pertanian lebih produktif dan berkelanjutan menuju smart farming.",
+    category: "iot",
+    sourceName: "Flux Blog",
+    sourceUrl:
+      "https://blog.flux.id/prediksi-perkembangan-iot-pertanian-smart-farming/",
+    readTime: 6,
+  },
+  {
+    id: "a7",
+    title: "Pertanian 5.0: Inovasi Digital Menuju Pertanian Berkelanjutan",
+    excerpt:
+      "Integrasi IoT, AI, dan robotika untuk pertanian yang lebih efisien, ramah lingkungan, dan siap menghadapi tantangan masa depan.",
+    category: "pertanian_5_0",
+    sourceName: "KMSEP Faperta UGM",
+    sourceUrl:
+      "https://kmsep.faperta.ugm.ac.id/2024/07/17/pertanian-5-0-transformasi-digital-menyongsong-pertanian-berkelanjutan/",
+    publishedAt: "2024-07-17",
+    readTime: 7,
+  },
+  {
+    id: "a8",
+    title:
+      "Rencana Pangan Nasional 2025–2029: Strategi Menguatkan Ketahanan Pangan Indonesia",
+    excerpt:
+      "Strategi terintegrasi memperkuat kedaulatan, kemandirian, dan ketahanan pangan melalui koordinasi lintas pihak, sinergi kebijakan, dan aksi adaptif.",
+    category: "kebijakan",
+    sourceName: "Badan Pangan Nasional",
+    sourceUrl:
+      "https://badanpangan.go.id/blog/post/rencana-pangan-nasional-2025-2029-menjawab-tantangan-ketahanan-pangan-di-indonesia",
+    readTime: 6,
+  },
+  {
+    id: "a9",
+    title: "Pertanian: Pilar Utama Ketahanan Pangan di Indonesia",
+    excerpt:
+      "Pertanian sebagai tulang punggung ketahanan pangan: menghadapi tantangan iklim dan alih fungsi lahan dengan teknologi, diversifikasi, kebijakan, dan kolaborasi.",
+    category: "ketahanan_pangan",
+    sourceName: "Environesia",
+    sourceUrl:
+      "https://environesia.co.id/blog/Pertanian-Kunci-Ketahanan-Pangan",
+    readTime: 5,
+  },
+  {
+    id: "a10",
+    title:
+      "Transformasi Pangan Nasional: Kunci Ketahanan & Keberlanjutan Pangan Indonesia",
+    excerpt:
+      "Transformasi sistem pangan lewat inovasi teknologi, digitalisasi, dan sinergi lintas sektor untuk memperkuat kemandirian, ketahanan, dan keberlanjutan.",
+    category: "kebijakan",
+    sourceName: "Bappenas",
+    sourceUrl:
+      "https://www.bappenas.go.id/id/berita/bappenas-dorong-transformasi-pangan-nasional-untuk-ketahanan-dan-keberlanjutan-pangan-gRGot",
+    readTime: 6,
   },
 ];

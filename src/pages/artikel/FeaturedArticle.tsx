@@ -1,40 +1,50 @@
-import { Calendar, Clock, User, ArrowRight, TrendingUp } from 'lucide-react';
-import type { Article } from '../../data/articleData';
+// src/components/artikel/FeaturedArticle.tsx
+import { ExternalLink, Sparkles } from "lucide-react";
+import type { Article } from "../../data/articleData";
 
 export function FeaturedArticle({ article }: { article: Article }) {
     return (
-        <div className="mb-16">
-            <div className="flex items-center gap-2 mb-4">
-                <TrendingUp className="w-5 h-5 text-green-600" />
-                <span className="font-semibold text-green-700">Artikel Unggulan</span>
-            </div>
-
-            <div className="group bg-white rounded-3xl overflow-hidden shadow-xl">
-                <div className="grid lg:grid-cols-2">
-                    <div className="relative h-64 lg:h-auto">
-                        <img
-                            src={article.image}
-                            alt={article.title}
-                            className="w-full h-full object-cover"
-                        />
+        <div className="mb-10 bg-white/80 backdrop-blur rounded-3xl border border-green-100 shadow-sm overflow-hidden">
+            <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                <div className="space-y-2">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-medium">
+                        <Sparkles className="w-4 h-4" />
+                        Featured
                     </div>
 
-                    <div className="p-8 flex flex-col justify-center">
-                        <h2 className="text-3xl font-bold mb-4">{article.title}</h2>
-                        <p className="text-gray-600 mb-6">{article.excerpt}</p>
+                    <div className="text-xs text-gray-500">
+                        {article.sourceName}
+                        {article.publishedAt ? ` • ${article.publishedAt}` : ""}
+                        {article.readTime ? ` • ${article.readTime} menit` : ""}
+                    </div>
 
-                        <div className="flex gap-4 text-sm text-gray-500 mb-6">
-                            <span className="flex gap-1"><User className="w-4" />{article.author}</span>
-                            <span className="flex gap-1"><Calendar className="w-4" />{article.date}</span>
-                            <span className="flex gap-1"><Clock className="w-4" />{article.readTime}</span>
-                        </div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                        {article.title}
+                    </h2>
 
-                        <button className="inline-flex items-center gap-2 text-green-600 font-medium">
-                            Baca Selengkapnya <ArrowRight />
-                        </button>
+                    <p className="text-gray-600 max-w-3xl">
+                        {article.excerpt}
+                    </p>
+
+                    <div className="mt-3">
+                        <span className="text-xs px-3 py-1 rounded-full border border-gray-200 bg-gray-50 text-gray-700">
+                            {article.category.replaceAll("_", " ")}
+                        </span>
                     </div>
                 </div>
+
+                <a
+                    href={article.sourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-linear-to-r from-green-600 to-green-700 text-white font-semibold shadow-lg shadow-green-500/20 hover:brightness-110 transition"
+                >
+                    Baca Sumber
+                    <ExternalLink className="w-5 h-5" />
+                </a>
             </div>
+
+            <div className="h-1 w-full bg-linear-to-r from-green-500 to-emerald-500" />
         </div>
     );
 }

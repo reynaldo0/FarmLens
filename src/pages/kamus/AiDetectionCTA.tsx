@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function ArticleCTA() {
     return (
-        <div className="mt-16 bg-linear-to-br from-green-600 to-emerald-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+        <div className="mt-16 bg-linear-to-br from-green-600 to-emerald-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden mb-20">
 
             {/* Decorative Orbs */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full translate-x-1/2 -translate-y-1/2" />

@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import PublicLayout from './PublicLayout';
-import Artikel from './pages/Artikel';
 import DashboardLayout from './DashboardLayout';
 import Beranda from './pages/Beranda';
 import Belajar from './pages/Belajar';
@@ -14,6 +13,9 @@ import Community from './pages/Community';
 import Chatbot from './pages/ChatBot';
 import FloatingChatbot from './components/FloatingChatbot';
 import ScrollToTop from './components/ScrollToTop';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
+import Artikel from './pages/Artikel';
 
 export default function App() {
   return (
@@ -30,6 +32,8 @@ export default function App() {
           <Route path="/kamus" element={<KamusTanaman />} />
           <Route path="/komunitas" element={<Community />} />
           <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Route>
 
         {/* DASHBOARD */}
